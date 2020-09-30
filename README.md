@@ -12,6 +12,8 @@ For example:
 ```
 # Merge branch to current branch
 git merge <branch>
+
+The next task will be on 05.10.2020
 ```
 
 ### Materials
