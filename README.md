@@ -1,6 +1,6 @@
 # education
 
-## 0 - Git and GitHub
+## Stage 0 - Git and GitHub
 
 ### Task
 
