@@ -5,6 +5,7 @@
 ### Task
 
 Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `task_0/README.md` file. (for example `education/dpoliuha/task_0/README.md`)
+
 You need to add to `README.md` descriptions of basic commands that are used while working with `git`.
 
 For example:
