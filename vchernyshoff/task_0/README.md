@@ -12,4 +12,5 @@ Here is the main git commands:
 9) git commit - create new commit with comments
 10) git push - push your commits to repo
 11) git merge <name_of_branch_to_in> - combine branches (name_of_branch with current)
-
+---
+Test: trying to use git commit -m
