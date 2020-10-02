@@ -35,4 +35,3 @@
 
 0. [Communicating using Markdown](https://lab.github.com/githubtraining/communicating-using-markdown)
 1. [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-2. [Typing Tutor](https://www.ratatype.com)
