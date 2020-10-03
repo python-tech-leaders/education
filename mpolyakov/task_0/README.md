@@ -1,77 +1,81 @@
-Show current version of your git: 
-`git --version`
+`git --version`\
+Show current version of your git
 
-Set the name and email that will be attached to your commits and tags: 
-`git config --global user.name "<your name>"`
-`git config --global user.email "<your email>"`
+`git config --global user.name "<your name>"`\
+`git config --global user.email "<your email>"`\
+Set the name and email that will be attached to your commits and tags
 
-Initialize a new local repository: 
-`git init [project name]`
+`git init [project name]`\
+Initialize a new local repository
 
-Download a project with the entire history from the remote repository: 
-`git clone [project url]`
+`git clone [project url]`\
+Download a project with the entire history from the remote repository
 
-Show the status of changes as untracked, modified, or staged: 
-`git status`
+`git status`\
+Show the status of changes as untracked, modified, or staged
 
-Prepare files for commit / add file to the staging area: 
-`git add [file]`
+`git add [file]`\
+Prepare files for commit / add file to the staging area
 
-Show changes between working directory and staging area: 
-`git diff`
+`git diff`\
+Show changes between working directory and staging area
 
-Shows any changes between the staging area and the repository: 
-`git diff --staged`
+`git diff --staged`\
+Shows any changes between the staging area and the repository
 
-Show all commits: 
-`git log`
+`git log`\
+Show all commits
 
-Show diff of specified commit: 
-`git show [hash]`
+`git show [hash]`\
+Show diff of specified commit
 
-Search in git: 
-`git grep [something]`
+`git grep [something]`\
+Search in git
 
-Create a new commit with files from the staging area. Must have a message: 
-`git commit -m 'commit message'`
+`git commit -m 'commit message'`\
+Create a new commit with files from the staging area. Must have a message
 
-Show local branches. With '-a' flag show remote branches also: 
-`git branch`
+`git commit --amend`\
+Change your last commit (if not pushed)
 
-Create new branch: 
-`git branch [branch_name]`
+`git branch`\
+Show local branches. With '-a' flag show remote branches also
 
-Switch working directory to specified branch: 
-`git checkout [branch_name]`
+`git branch [branch_name]`\
+Create new branch
 
-Delete untracked files from working direcrory: 
-`git clean -fd`
+`git checkout [branch_name]`\
+Switch working directory to specified branch
 
-Discard changes in working directory: 
-`git restore [file]`
+`git clean -fd`\
+Delete untracked files from working direcrory
 
-Move prepared for commit files to unstage area: 
-`git restore --staged [file]`
+`git restore [file]`\
+Discard changes in working directory
 
-Create a new commit, reverting changes from the specified commit: 
-`git revert [hash]`
+`git restore --staged [file]`\
+Move prepared for commit files to unstage area
 
-Discard number of commits (only if not pushed to remote repo) and move them to working directory: 
-`git reset HEAD^[number of commits to reset]`
+`git revert [hash]`\
+Create a new commit, reverting changes from the specified commit
 
-Hide current changes in your working directory into stash for later use: 
-`git stash`
-Restore all hidden files: 
-`git stash pop`
+`git reset HEAD^[number of commits to reset]`\
+Discard number of commits (only if not pushed to remote repo) and move them to working directory
 
-Join specified branch with your current one: 
-`git merge [from_branch]`
+`git stash`\
+Hide current changes in your working directory into stash for later use
 
-Updates your local repo with remote one: 
-`git pull`
+`git stash pop`\
+Restore all hidden files
 
-Push local changes to remote repo: 
-`git push [remote]`
+`git merge [from_branch]`\
+Join specified branch with your current one
 
-Push local branch to remote repo: 
-`git push -u [remote] [branch]`
+`git pull`\
+Updates your local repo with remote one
+
+`git push [remote]`\
+Push local changes to remote repo
+
+`git push -u [remote] [branch]`\
+Push local branch to remote repo
