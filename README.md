@@ -70,4 +70,5 @@
 0. [Communicating using Markdown](https://lab.github.com/githubtraining/communicating-using-markdown)
 1. [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 2. [Typing Tutor](https://www.ratatype.com)
-3  [Git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+3. [Git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+4. [SQL video course](https://www.youtube.com/playlist?list=PLrCZzMib1e9reQb3ZXLWVaEu2CM3R54ho)
