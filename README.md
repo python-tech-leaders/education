@@ -6,16 +6,13 @@
 
 0. Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `task_0/README.md` file. (for example `education/dpoliuha/task_0/README.md`)
 
-  You need to add to `README.md` descriptions of basic commands that are used while working with `git`.
-
-  For example:
-  ```
-  # Merge branch to current branch
-  git merge <branch>
-  ```
-
-  The next task will be on 05.10.2020
-
+    You need to add to `README.md` descriptions of basic commands that are used while working with `git`.
+    
+    For example:
+    ```
+    # Merge branch to current branch
+    git merge <branch>
+    ```
 
 ### Materials
 
@@ -28,11 +25,49 @@
 6. [Oh shit, git!](http://ohshitgit.com/)
 7. [Flight rules for git](https://github.com/k88hudson/git-flight-rules)
 8. [GitHub Learning Lab](https://lab.github.com/courses)
-9. [Git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
 
+## Stage 1 - Unix Shell
 
-### Extra
+### Task
+
+0. Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `task_1/README.md` file. (for example `education/dpoliuha/task_1/README.md`)
+
+    You need to add to `README.md` descriptions of basic commands that are used while working with unix shell.
+    
+    For example:
+    ```
+    # View content of file
+    more <file>
+    ```
+
+1. \[optional\] Install [Oh my zsh](https://ohmyz.sh) and configure [plugins](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins).
+
+    Add useful `zsh` shortcuts to your `task_1/README.md` file.
+    
+    For example:
+    ```
+    # Git push shortcut
+    ggp
+    ```
+
+### Materials
+
+0. [Linux Survival](https://linuxsurvival.com/linux-tutorial-introduction/)
+1. [linuxcommand](http://linuxcommand.org/)
+2. [Linux Bash Shell Cheat Sheet](https://annawilliford.github.io/2016-04-02-UTA/workshop/Linux/bash_cheat_sheet.pdf)
+3. [Advanced Bash-Scripting Guide](http://www.tldp.org/LDP/abs/html/index.html)
+4. [A Guide to 100 Useful Unix Commands](http://oliverelliott.org/article/computing/ref_unix/)
+4. [Command Line Power User](https://commandlinepoweruser.com/)
+
+#### Materials for Windows lovers :smile:
+
+0. [How to Install WSL, Zsh and Oh My Zsh on Windows 10](https://evdokimovm.github.io/windows/zsh/shell/syntax/highlighting/ohmyzsh/hyper/terminal/2017/02/24/how-to-install-zsh-and-oh-my-zsh-on-windows-10.html)
+
+## Stage 2 - available on 08.10.2020 (TBD)
+
+## Extras
 
 0. [Communicating using Markdown](https://lab.github.com/githubtraining/communicating-using-markdown)
 1. [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 2. [Typing Tutor](https://www.ratatype.com)
+3  [Git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
