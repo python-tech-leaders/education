@@ -1,9 +1,9 @@
-#0 - Basic commands shell
+# 0 - Basic commands shell
 >descriptions of basic commands that are used while working with unix shell
 
 `shell` has very many commands. I'll try to show the most useful and common.
 Let's separate all commands to groups.
-####1) Information commands:
+#### 1) Information commands:
 |№|command|description|
 |---|---|---|
 |1|`date`|show current date and time|
@@ -15,7 +15,7 @@ Let's separate all commands to groups.
 | |example:|`uname -m` - shows architecture of your OS - 32 or 64 bit|
 |6|`groups`|check all user groups|
 --------------------------------------
-####2) Navigation and file commands:
+#### 2) Navigation and file commands:
 |№|command|description|
 |---|---|---|
 1|`cd`|change directory
@@ -60,7 +60,7 @@ You can show info about these commands here: https://habr.com/ru/post/471242/
 
 
 ------------
-#1 - Optional: add useful zsh shortcuts
+# 1 - Optional: add useful zsh shortcuts
 >*I've added the `git` plugin to zsh. And Here are most useful shortcuts:*
 * `g` - git
 * `gst` - git status
@@ -78,4 +78,4 @@ You can show info about these commands here: https://habr.com/ru/post/471242/
 * `grev` git revert
 * `grh`	git reset  
 -----------------  
-######All list of commands you can see here: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
+###### All list of commands you can see here: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
