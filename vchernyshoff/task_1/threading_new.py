@@ -27,7 +27,9 @@ import requests
 import time
 
 # image_url = 'http://www.etomesto.ru/map/base/21/yadrinskiy-uezd-1913.jpg' # 12Mb
-image_url = 'https://storge.pic2.me/download/origin/276412.jpeg' # 1 Mb
+# image_url = 'https://storge.pic2.me/download/origin/208299.jpeg' # 6 Mb
+image_url = 'https://storge.pic2.me/download/origin/5689.jpeg' # 6 Mb
+
 
 def download_image_with_i_name(index):
     index += 1
@@ -40,24 +42,25 @@ def download_image_with_i_name(index):
 
 
 def get_with_no_threading():
-    for i in range(10):
+    for i in range(100):
         download_image_with_i_name(i)
 
 
 def get_with_threading():
-    for i in range(10):
+    for i in range(100):
         thr = Thread(target=download_image_with_i_name, args=(i, ))
         thr.start()
-    while threading.active_count() > 1:
+    while threading.active_count() > 2:
         pass
+    print('осталась последняя картинка')
 
 
 def main():
 
-    get_with_no_threading()
+    # get_with_no_threading()
 
 
-    # get_with_threading()
+    get_with_threading()
 
 
 
