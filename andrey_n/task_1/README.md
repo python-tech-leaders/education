@@ -13,10 +13,12 @@
 * mv (Used to move the files or directories)
 * rm (Used to remove files or directories)
 * nano (Used to create or update file)
+* grep (searches  for  PATTERNS  in  each  FILE)
 
 # Navigation Commands
 
 * ls (To get the list of files or folders)
+* dir (list of folders))
 * cd (Change directory)
 * ln (Create link)
 
