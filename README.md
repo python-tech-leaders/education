@@ -120,7 +120,7 @@ You need to:
 5. Create cli for your script ([argparse](https://docs.python.org/3/library/argparse.html)). Should look like:
     ![cli](./img/stage2_0.png)
 
-
+## Stage 3 - Will be added on 19.10.2020
 
 ## Extras
 
