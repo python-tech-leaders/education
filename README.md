@@ -118,7 +118,7 @@ You need to:
 3. Write results to file (use [pathlib](https://docs.python.org/3/library/pathlib.html) to do that).
 4. You need to do all of that with [threading](https://docs.python.org/3/library/threading.html) and without. (So, you'll have 2 functions at least).
 5. Create cli for your script ([argparse](https://docs.python.org/3/library/argparse.html)). Should look like:
-    ![cli](img/stage2_0.png)
+    ![cli](./img/stage2_0.png)
 
 
 
