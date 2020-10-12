@@ -74,7 +74,9 @@ Create cheatsheet for python presentation.
 Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `task_3/main.py` file. (for example `education/dpoliuha/task_3/main.py`)
 
 You need to:
+
 0. Download all text data from the following pages (use [requests](https://requests.readthedocs.io/en/master/) to download files):
+    
     - https://en.wikipedia.org/wiki/Wikipedia
     - https://en.wikipedia.org/wiki/Main_Page
     - https://en.wikipedia.org/wiki/COVID-19_pandemic
