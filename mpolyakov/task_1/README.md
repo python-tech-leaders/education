@@ -36,4 +36,4 @@ command|description|
 `kill <PID>`|kill a process
 `>`|redirect the result to a file (rewrite the file)
 `>>`|add the result to the end of a file
-`command1 | command2`|chain commands: `cat file | grep one | grep two`
+`command1 \| command2`|chain commands: `cat file \| grep one | grep two`
