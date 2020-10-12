@@ -119,6 +119,7 @@ You need to:
 4. You need to do all of that with [threading](https://docs.python.org/3/library/threading.html) and without. (So, you'll have 2 functions at least).
 5. Create cli for your script ([argparse](https://docs.python.org/3/library/argparse.html)). Should look like:
     ![cli](./img/stage2_0.png)
+6. Your script should output time duration of processing.
 
 ## Stage 3 - Will be added on 19.10.2020
 
