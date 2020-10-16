@@ -18,7 +18,26 @@ URL_TO_SAVE = (
 )
 
 
-def load_text():
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    '--output_file_name',
+    default='/var/tmp/output.json',
+    help='Path to the outputfile in JSON format',
+)
+parser.add_argument(
+    '--script-mode',
+    default='single',
+    choices=('single', 'threaded'),
+    help='Script run mode',
+)
+parser.add_argument(
+    '--threads-count',
+    default='10',
+    help='Count of threads (if threaded mode)',
+)
+
+
+def single_load():
     data = ''
     for url in URL_TO_SAVE:
         response = requests.get(url)
@@ -38,27 +57,11 @@ def save_to_file(sorted_letter_count, file_name):
     with open(file_name, 'w', encoding='utf8') as json_file:
         json.dump(sorted_letter_count, json_file, ensure_ascii=False, indent=4)
 
-parser = argparse.ArgumentParser()
-parser.add_argument(
-        '--output_file_name',
-        default='/var/tmp/output.json',
-        help='Path to the outputfile in JSON format',
-    )
-parser.add_argument(
-        '--script-mode',
-        default='single',
-        choices=('single', 'threaded'),
-        help='Script run mode',
-    )
-parser.add_argument(
-        '--threads-count',
-        default='10',
-        help='Count of threads (if threaded mode)',
-    )
-
 
 def main():
     args = parser.parse_args()
-    save_to_file(letter_count(load_text()), file_name=args.output_file_name)
+    save_to_file(letter_count(single_load()), file_name=args.output_file_name)
 
-main()
+
+if __name__ == '__main__':
+    main()
