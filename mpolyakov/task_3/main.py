@@ -3,6 +3,7 @@ import json
 import os
 import requests
 from collections import Counter, OrderedDict
+from progress.bar import Bar
 
 URL_TO_SAVE = (
     'https://en.wikipedia.org/wiki/Wikipedia',
@@ -39,9 +40,13 @@ parser.add_argument(
 
 def single_load():
     data = ''
+    bar = Bar('Processing', max=len(URL_TO_SAVE))
     for url in URL_TO_SAVE:
         response = requests.get(url)
         data += response.text
+        print(' ', url)
+        bar.next()
+    bar.finish()
     return data
 
 
