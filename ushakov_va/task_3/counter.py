@@ -1,11 +1,7 @@
-def count_char(text):
-    text = text.replace(' ', '').replace('\n', '')
+import collections
 
-    result = {}
-    for c in text:
-        if c not in result:
-            result[c] = 1
-        else:
-            result[c] += 1
+def count_char(texts):
+    #text = text.replace(' ', '').replace('\n', '')
 
-    return result
+    all_texts = ''.join(texts)
+    return collections.Counter(all_texts)

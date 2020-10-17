@@ -5,15 +5,16 @@ from requests import HTTPError
 
 
 def _get_data(url):
+    data = ""
     try:
         response = requests.get(url)
         response.raise_for_status()
+        data = response.text
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
     except Exception as err:
         print(f'Other error occurred: {err}')
-    else:
-        return response.text
+    return data
 
 
 def get_data_by_single_thread(urls):
@@ -37,9 +38,13 @@ def _kernel_thread(*args):
 def get_data_by_more_thread(urls, count_thread=4):
     threads = []
     for i in range(count_thread):
-        threads.append(threading.Thread(target=_kernel_thread, args=(list(urls[i * (len(urls) % count_thread): len(
-            urls) - 1 if (i + 1) * (len(urls) % count_thread) >= len(urls) else (i + 1) * (
-                    len(urls) % count_thread)]))))
+        start_index = i * (len(urls) % count_thread)
+        finish_index = 0
+        if (i + 1) * (len(urls) % count_thread) >= len(urls):
+            finish_index = len(urls) - 1
+        else:
+            finish_index = (i + 1) * (len(urls) % count_thread)
+        threads.append(threading.Thread(target=_kernel_thread, args=(list(urls[start_index:finish_index]))))
     for thread in threads:
         thread.start()
     for thread in threads:

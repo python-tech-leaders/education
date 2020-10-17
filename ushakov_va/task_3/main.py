@@ -1,9 +1,9 @@
+import argparse
 import os
 import time
 from operator import itemgetter
-import argparse
-from downloader import get_data_by_single_thread, get_data_by_more_thread
 from counter import count_char
+from downloader import get_data_by_single_thread, get_data_by_more_thread
 
 urls = [
     'https://en.wikipedia.org/wiki/Wikipedia',
@@ -38,19 +38,11 @@ if __name__ == '__main__':
         raise Exception('Incorrect mode')
 
     path = os.path.join(DIR, args.output_file_name)
-    result = {}
-    urls_iter = iter(urls)
-    for text in data:
-        text_form = str(dict(sorted(count_char(text).items(), key=itemgetter(1), reverse=True))).replace(', ', '\n')[
-                    1:-1]
-        url = next(urls_iter)
-        result[url] = text_form
+    result = sorted(count_char(data).items(), key=itemgetter(1), reverse=True)
     finish_time = time.time()
-    del urls_iter
 
     with open(path, "w", encoding="utf-8") as file:
-        for url, text_form in result.items():
-            file.write(f"URL: {url} \n\n{text_form}\n\n\n")
+        file.write(''.join([f'{i[0]}: {i[1]}\n' for i in result]))
 
     print(f'Work is done. Result is saved in file {path}. '
           f'Time duration of processing is {finish_time - start_time} seconds')
