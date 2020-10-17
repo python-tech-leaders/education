@@ -29,7 +29,7 @@ if __name__ == '__main__':
     parser.add_argument("--threads_count", type=int, default=4, help='Count of thread (if threaded mode)')
     args = parser.parse_args()
 
-    start_time = time.time()
+    start_time = time.time()  # start recording time
     if args.script_mode == 'single':
         data = get_data_by_single_thread(urls)
     elif args.script_mode == 'threaded':
@@ -38,11 +38,11 @@ if __name__ == '__main__':
         raise Exception('Incorrect mode')
 
     path = os.path.join(DIR, args.output_file_name)
-    result = sorted(count_char(data).items(), key=itemgetter(1), reverse=True)
-    finish_time = time.time()
+    result = sorted(count_char(data).items(), key=itemgetter(1), reverse=True)  # sorted by value
+    finish_time = time.time()  # finish recording time
 
     with open(path, "w", encoding="utf-8") as file:
-        file.write(''.join([f'{i[0]}: {i[1]}\n' for i in result]))
+        file.write(''.join([f'{i[0]}: {i[1]}\n' for i in result]))  # formatting lines and write to file
 
     print(f'Work is done. Result is saved in file {path}. '
           f'Time duration of processing is {finish_time - start_time} seconds')
