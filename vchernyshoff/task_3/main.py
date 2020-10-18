@@ -5,13 +5,15 @@ import threading
 import argparse
 
 parser = argparse.ArgumentParser(description='Incredible parser wiki. It shows count of all symbols from asked wiki http(s) pages.')
-parser = argparse.ArgumentParser(description='Videos to images')
-parser.add_argument('output-file-name', type=str, help='set name of an output file')
-parser.add_argument('script-mode{threaded, single}', type=str, help='Script run mode')
-parser.add_argument('threads_count{true, false}', type=str, help='Show count of threads')
+parser.add_argument('--output-file-name', type=str, default='symbol_count.txt', help='set name of an output file (default is "symbol_count.txt")')
+parser.add_argument('--script-mode', type=str, default="single", help='Script run mode. Values: threaded, single. Default is single')
+parser.add_argument('--threads_count', type=bool, default=False, help='Show count of threads. Values: true or false. Default is False')
 args = parser.parse_args()
 
 symbol_count = {}
+use_threading = False
+
+show_threads = False
 links = (
     'https://en.wikipedia.org/wiki/Wikipedia',
     'https://en.wikipedia.org/wiki/Main_Page',
@@ -23,7 +25,7 @@ links = (
     'https://bg.wikipedia.org/wiki/Пандемия_от_коронавирус_(2019_–_2020)',
     'https://be.wikipedia.org/wiki/Пандэмія_COVID-19',
     'https://ro.wikipedia.org/wiki/Pandemia_de_coronaviroză_(COVID-19)'
-    )
+)
 
 
 # ================ with no threading: ==========================================
@@ -41,11 +43,10 @@ def sort_dict(symbol_count: dict) -> str:
     return symbol_count_sorted
 
 
-def export_to_file(text: str) -> None:
+def export_to_file(text: str, name) -> None:
     """save text to file symbol_count.txt"""
-    p = Path('symbol_count.txt')
-    p.write_text(text)
-
+    outpath = Path.cwd() / name
+    outpath.write_text(text)
 
 
 def main_no_threading() -> None:
@@ -53,7 +54,6 @@ def main_no_threading() -> None:
     all_symbols = ''
     for link in links:
         all_symbols += get_symbols_from_link(link)
-
 
     # 2) Check every symbol, and create dict with symbol (as ) count
     symbol_count = {}
@@ -67,7 +67,7 @@ def main_no_threading() -> None:
     symbol_count_sorted = sort_dict(symbol_count)
 
     # 5) export dit to file symbol_count.txt
-    export_to_file(symbol_count_sorted)
+    export_to_file(symbol_count_sorted, args.output_file_name)
 
 
 # ======================with threading:==========================================
@@ -83,32 +83,38 @@ def threading_get_symbols_from_link(link: str) -> None:
             symbol_count[symbol] = 1
 
 
-def main_with_threadng():
+def main_with_threading():
     global symbol_count
+    global show_threads
+
     # 1) Download all http text with threading and create set:
     for link in links:
-        thread = threading.Thread(target=threading_get_symbols_from_link, args=(link, ))
+        thread = threading.Thread(target=threading_get_symbols_from_link, args=(link,))
         thread.start()
 
+
     while threading.active_count() > 1:
+        if args.threads_count is True:
+            act_count = threading.active_count()
+            while threading.active_count() == act_count:
+                time.sleep(0.01)
+            print('Текущее количество активных потоков:', threading.active_count())
         time.sleep(0.01)
 
     # we have symbol count set. Let's sort it
     symbol_count_sorted = sort_dict(symbol_count)
 
     # export it:
-    export_to_file(symbol_count_sorted)
+    export_to_file(symbol_count_sorted, args.output_file_name)
 
 
 if __name__ == '__main__':
     start_time = time.time()
-    # if threading_switch is True:
-    #     main_with_threading()
-    # else:
-    #     main_no_threading()
+    if args.script_mode == 'single':
+        main_no_threading()
+    else:
+        main_with_threading()
 
-    main_no_threading()
-    # main_with_threadng()
+
 
     print('Затраченное время: ' + format(time.time() - start_time))
-
