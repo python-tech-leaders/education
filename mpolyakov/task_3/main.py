@@ -1,8 +1,11 @@
 import argparse
 import json
-import os
+import threading
+import time
+from collections import Counter
+from pathlib import Path
+
 import requests
-from collections import Counter, OrderedDict
 from progress.bar import Bar
 
 URL_TO_SAVE = (
@@ -26,46 +29,92 @@ parser.add_argument(
     help='Path to the outputfile in JSON format',
 )
 parser.add_argument(
-    '--script-mode',
+    '--script_mode',
     default='single',
     choices=('single', 'threaded'),
     help='Script run mode',
 )
 parser.add_argument(
-    '--threads-count',
-    default='10',
+    '--threads_count',
+    default=2,
     help='Count of threads (if threaded mode)',
 )
 
 
-def single_load():
+def load(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except (
+        requests.exceptions.ConnectionError,
+        requests.exceptions.HTTPError,
+        requests.exceptions.RequestException,
+    ) as exc:
+        print('An error occurred: %s', exc)
+    return str(response.content)
+
+
+def single_load(urls):
     data = ''
     bar = Bar('Processing', max=len(URL_TO_SAVE))
-    for url in URL_TO_SAVE:
-        response = requests.get(url)
-        data += response.text
-        print(' ', url)
+    for url in urls:
+        data += load(url)
         bar.next()
+        print(' ', url)
     bar.finish()
+    print('Total letters quantity: {}'.format(len(data)))
     return data
+
+
+DATA = ''
+lock = threading.Lock()
+
+
+def t_load(urls):
+    global DATA
+    for url in urls:
+        with lock:
+            DATA += load(url)
+
+
+def threading_load(urls, threads_count):
+    for i in range(threads_count):
+        start = i * len(urls) // threads_count
+        stop = (i+1) * len(urls) // threads_count
+        thread = threading.Thread(target=t_load, args=(urls[start:stop],))
+        thread.start()
+        print(thread.name)
+        thread.join()
+    print('Total letters quantity: {}'.format(len(DATA)))
+    return DATA
 
 
 def letter_count(data):
     letter_count = dict(Counter(data))
-    sorted_letter_count = OrderedDict(
-        sorted(letter_count.items(), key=lambda kv: kv[1], reverse=True)
-    )
+    sorted_letter_count = dict(
+        sorted(letter_count.items(), key=lambda x: x[1], reverse=True))
     return sorted_letter_count
 
 
 def save_to_file(sorted_letter_count, file_name):
-    with open(file_name, 'w', encoding='utf8') as json_file:
-        json.dump(sorted_letter_count, json_file, ensure_ascii=False, indent=4)
+    p = Path(file_name)
+    with p.open('w', encoding='utf8') as file:
+        json.dump(sorted_letter_count, file,
+                  ensure_ascii=False, indent=4)
 
 
 def main():
+    start_time = time.time()
     args = parser.parse_args()
-    save_to_file(letter_count(single_load()), file_name=args.output_file_name)
+    if args.script_mode == 'threaded':
+        save_to_file(letter_count(
+            threading_load(URL_TO_SAVE, int(args.threads_count))),
+            file_name=args.output_file_name)
+    else:
+        save_to_file(letter_count(
+            single_load(urls=URL_TO_SAVE)),
+            file_name=args.output_file_name)
+    print('Total time: {}'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':
