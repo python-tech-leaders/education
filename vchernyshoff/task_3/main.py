@@ -1,3 +1,4 @@
+import sys
 import time
 import requests
 from pathlib import Path
@@ -31,7 +32,14 @@ links = (
 # ================ with no threading: ==========================================
 def get_symbols_from_link(link: str) -> str:
     """get html from link"""
-    return requests.get(link).text
+    try:
+        response = requests.get(link)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        sys.exit(1)
+
+    return response.text
 
 
 def sort_dict(symbol_count: dict) -> str:
@@ -75,8 +83,15 @@ def threading_get_symbols_from_link(link: str) -> None:
     """get html from link"""
     global symbol_count
 
-    text = requests.get(link).text  # get text from wiki
-    for symbol in text:
+
+    try:
+        response = requests.get(link)   # get text from wiki
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        sys.exit(1)
+
+    for symbol in response.text:
         try:
             symbol_count[symbol] += 1
         except:
