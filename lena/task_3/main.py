@@ -1,7 +1,28 @@
+import threading
+import argparse
+import json
+import time
 import requests
 from pathlib import Path
-import json
 
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    '--output_file_name',
+    type = str,
+    help='Path to the outputfile in JSON format',
+)
+parser.add_argument(
+    '--script_mode',
+    type = str,
+    choices=('single', 'threaded'),
+    help='Script run mode',
+)
+parser.add_argument(
+    '--threads_count',
+    type = int,
+    help='Count of threads',
+)
 
 links = ['https://en.wikipedia.org/wiki/Wikipedia',
          'https://en.wikipedia.org/wiki/Wikipedia',
@@ -44,10 +65,37 @@ def wr_file(sort_dict, file_name):
 
 
 '''With Threading'''
+data = ''
+lock = threading.Lock()
+def t_load(urls, data):
+    for url in urls:
+        with data:
+            data += get_data(url)
 
+
+def threading_load(urls,threads_count):
+    for i in range(threads_count):
+        start = i * len(urls) // threads_count
+        stop = (i+1) * len(urls) // threads_count
+        thread = threading.Thread(target=t_load, args=(urls[start:stop],))
+        thread.start()
+        print(thread.name)
+        thread.join()
+    print('Total letters quantity: {}'.format(len(data)))
+    return data
 '''...'''
 
 if __name__ == '__main__':
-    data = get_data(links)
-    dict = count_sort(data)
-    #wr_file(dict, 'file')
+    start_time = time.time()
+
+    args = parser.parse_args()
+    if args.script_mode == 'threaded':
+        wr_file(count_sort(
+            threading_load(links, int(args.threads_count))),
+            file_name=args.output_file_name)
+    else:
+        data = get_data(links)
+        dict = count_sort(data)
+        wr_file(dict, 'json')
+    print('Total time: {}'.format(time.time() - start_time))
+
