@@ -9,61 +9,36 @@
 4. [SQL video course](https://www.youtube.com/playlist?list=PLrCZzMib1e9reQb3ZXLWVaEu2CM3R54ho)
 5. [Why you should be using pathlib](https://treyhunner.com/2018/12/why-you-should-be-using-pathlib/)
 
-## Stage 4 - Will be added on 26.10.2020
+## Stage 4 - Will be added on 23.10.2020
 
 ## Stage 3 - Data scraping 
 
 ### Homework 4
 
-Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `homework_4/main.py` file. (for example `education/dpoliuha/homework_4/main.py`)
+Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains that task.
 
-You need to:
-
-0. Parse all products from category **electronics** from [olx](https://olx.ua) website (use [scrapy](https://scrapy.org)):
+You need to create a crawler to get all products from category **electronics** from [olx](https://olx.ua) website (use [scrapy](https://scrapy.org)).
     
-    - https://en.wikipedia.org/wiki/Wikipedia
-    - https://en.wikipedia.org/wiki/Main_Page
-    - https://en.wikipedia.org/wiki/COVID-19_pandemic
-    - https://ru.wikipedia.org/wiki/Пандемия_COVID-19
-    - https://yi.wikipedia.org/wiki/קאוויד-19_פאנדעמיק
-    - https://tr.wikipedia.org/wiki/COVID-19_pandemisi
-    - https://uk.wikipedia.org/wiki/Пандемія_коронавірусної_хвороби_2019
-    - https://bg.wikipedia.org/wiki/Пандемия_от_коронавирус_(2019_–_2020)
-    - https://be.wikipedia.org/wiki/Пандэмія_COVID-19
-    - https://ro.wikipedia.org/wiki/Pandemia_de_coronaviroză_(COVID-19)
-1. Count all characters from all of downloaded text data ([collections](https://docs.python.org/3/library/collections.html) might be very helpful).
+It should be able to extract the following fields:
 
-    Ex:
-    ```python
-    data = "<h1>S</h1>"
-    ...
-    letter_count = {
-        "h": 2,
-        "<": 2,
-        ">": 2,
-        "S": 1,
-        "1": 2,
-        "/": 1,
-    }
-    ```
-2. Sort results data based on count descent.
+- product price
+- product name
+- product category
+- product photos urls
+- product state
+- product description
+- product date of creation
+- product views count
+- product id
+- product url
+- seller name
+- seller address
+- olx delivery availability
+- other fields that might be important (as much fields as you can find)
+    
+### Materials
 
-    Ex:
-    ```python
-    sorted_letter_count = {
-        "h": 2,
-        "<": 2,
-        ">": 2,
-        "1": 2,
-        "/": 1,
-        "S": 1,
-    }
-    ```
-3. Write results to file (use [pathlib](https://docs.python.org/3/library/pathlib.html) to do that).
-4. You need to do all of that with [threading](https://docs.python.org/3/library/threading.html) and without. (So, you'll have 2 functions at least).
-5. Create cli for your script ([argparse](https://docs.python.org/3/library/argparse.html)). Should look like:
-    ![cli](./img/stage2_0.png)
-6. Your script should output time duration of processing.
+0. [Scrapy docs](https://docs.scrapy.org/en/latest/)
 
 ## Stage 2 - Python
 
