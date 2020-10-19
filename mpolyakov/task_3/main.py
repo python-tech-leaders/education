@@ -44,6 +44,7 @@ parser.add_argument(
 
 def load(url):
     '''Load binary data from url and convert it to a string.'''
+    result = ''
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -118,8 +119,7 @@ def letter_count(data):
 
 
 def save_to_file(sorted_letter_count, file_name):
-    p = pathlib.Path(file_name)
-    with p.open('w', encoding='utf8') as file:
+    with file_name.open('w', encoding='utf8') as file:
         json.dump(sorted_letter_count, file,
                   ensure_ascii=False, indent=4)
 
