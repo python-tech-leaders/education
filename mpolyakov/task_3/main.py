@@ -1,9 +1,9 @@
 import argparse
 import json
+import pathlib
 import threading
 import time
 from collections import Counter
-from pathlib import Path
 
 import requests
 from progress.bar import Bar
@@ -25,7 +25,8 @@ URL_TO_SAVE = (
 parser = argparse.ArgumentParser()
 parser.add_argument(
     '--output_file_name',
-    default='/var/tmp/output.json',
+    default=pathlib.Path('/var/tmp/output.json'),
+    type=pathlib.Path,
     help='Path to the outputfile in JSON format',
 )
 parser.add_argument(
@@ -46,6 +47,7 @@ def load(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
+        result = str(response.content)
     except (
         requests.exceptions.ConnectionError,
         requests.exceptions.HTTPError,
@@ -54,7 +56,7 @@ def load(url):
         print('Connection error occurred: %s', exc)
     except Exception as exc:
         print('An error occurred: %s', exc)
-    return str(response.content)
+    return result
 
 
 def single_load(urls):
@@ -116,7 +118,7 @@ def letter_count(data):
 
 
 def save_to_file(sorted_letter_count, file_name):
-    p = Path(file_name)
+    p = pathlib.Path(file_name)
     with p.open('w', encoding='utf8') as file:
         json.dump(sorted_letter_count, file,
                   ensure_ascii=False, indent=4)
@@ -129,7 +131,7 @@ def main():
         save_to_file(letter_count(
             threading_load(URL_TO_SAVE, int(args.threads_count))),
             file_name=args.output_file_name)
-    else:
+    elif args.script_mode == 'single':
         save_to_file(letter_count(
             single_load(urls=URL_TO_SAVE)),
             file_name=args.output_file_name)
