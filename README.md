@@ -2,7 +2,7 @@
 
 ## Stage 0 - Git and GitHub
 
-### Task 0
+### Homework 0
 
 0. Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `task_0/README.md` file. (for example `education/dpoliuha/task_0/README.md`)
 
@@ -28,7 +28,7 @@
 
 ## Stage 1 - Unix Shell
 
-### Task 1
+### Homework 1
 
 0. Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `task_1/README.md` file. (for example `education/dpoliuha/task_1/README.md`)
 
@@ -65,11 +65,11 @@
 
 ## Stage 2 - Python
 
-### Task 2
+### Homework 2
 
 Create cheatsheet for python presentation.
 
-### Task 3
+### Homework 3
 
 Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains `task_3/main.py` file. (for example `education/dpoliuha/task_3/main.py`)
 
