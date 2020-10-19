@@ -42,6 +42,7 @@ parser.add_argument(
 
 
 def load(url):
+    '''Load binary data from url and convert it to a string.'''
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -50,11 +51,17 @@ def load(url):
         requests.exceptions.HTTPError,
         requests.exceptions.RequestException,
     ) as exc:
+        print('Connection error occurred: %s', exc)
+    except Exception as exc:
         print('An error occurred: %s', exc)
     return str(response.content)
 
 
 def single_load(urls):
+    '''
+    Load data from urls list and add it to 'data' variable.
+    Add progress bar for visualisation.
+    '''
     data = ''
     bar = Bar('Processing', max=len(URL_TO_SAVE))
     for url in urls:
@@ -66,11 +73,15 @@ def single_load(urls):
     return data
 
 
-DATA = ''
+DATA = ''  # global variable for threads
 lock = threading.Lock()
 
 
 def t_load(urls):
+    '''
+    Main function for each thread.
+    Load data for each url in urls list.
+    '''
     global DATA
     for url in urls:
         with lock:
@@ -78,6 +89,9 @@ def t_load(urls):
 
 
 def threading_load(urls, threads_count):
+    '''
+    Load data in threading mode with set quantity of threads.
+    '''
     for i in range(threads_count):
         start = i * len(urls) // threads_count
         stop = (i+1) * len(urls) // threads_count
@@ -90,6 +104,11 @@ def threading_load(urls, threads_count):
 
 
 def letter_count(data):
+    '''
+    Count data elements and store it as dictionary keys
+    and their counts as dictionary values.
+    Sort it in decent order.
+    '''
     letter_count = dict(Counter(data))
     sorted_letter_count = dict(
         sorted(letter_count.items(), key=lambda x: x[1], reverse=True))
