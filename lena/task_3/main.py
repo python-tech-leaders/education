@@ -6,7 +6,7 @@ import requests
 from pathlib import Path
 
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(__name__ == '__main__')
 parser.add_argument(
     '--output_file_name',
     type = str,
@@ -69,7 +69,7 @@ data = ''
 lock = threading.Lock()
 def t_load(urls, data):
     for url in urls:
-        with data:
+        with lock:
             data += get_data(url)
 
 
