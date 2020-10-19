@@ -17,7 +17,7 @@
 
 Send a pull-request to `python-tech-leaders/education` repo (this one) with your folder that contains that task.
 
-You need to create a crawler to get all products from category **electronics** from [olx](https://olx.ua) website (use [scrapy](https://scrapy.org)).
+You need to create a crawler to get 100 products from category **electronics** from [olx](https://olx.ua) website (use [scrapy](https://scrapy.org)).
     
 It should be able to extract the following fields:
 
