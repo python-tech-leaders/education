@@ -6,23 +6,6 @@ import requests
 from pathlib import Path
 
 
-parser = argparse.ArgumentParser(__name__ == '__main__')
-parser.add_argument(
-    '--output_file_name',
-    type = str,
-    help='Path to the outputfile in JSON format',
-)
-parser.add_argument(
-    '--script_mode',
-    type = str,
-    choices=('single', 'threaded'),
-    help='Script run mode',
-)
-parser.add_argument(
-    '--threads_count',
-    type = int,
-    help='Count of threads',
-)
 
 links = ['https://en.wikipedia.org/wiki/Wikipedia',
          'https://en.wikipedia.org/wiki/Wikipedia',
@@ -67,7 +50,8 @@ def wr_file(sort_dict, file_name):
 '''With Threading'''
 data = ''
 lock = threading.Lock()
-def t_load(urls, data):
+def t_load(urls):
+    global data
     for url in urls:
         with lock:
             data += get_data(url)
@@ -87,6 +71,24 @@ def threading_load(urls,threads_count):
 
 if __name__ == '__main__':
     start_time = time.time()
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--output_file_name',
+        type=str,
+        help='Path to the outputfile in JSON format',
+    )
+    parser.add_argument(
+        '--script_mode',
+        type=str,
+        choices=('single', 'threaded'),
+        help='Script run mode',
+    )
+    parser.add_argument(
+        '--threads_count',
+        type=int,
+        help='Count of threads',
+    )
 
     args = parser.parse_args()
     if args.script_mode == 'threaded':
