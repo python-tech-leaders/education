@@ -1,6 +1,6 @@
 import requests
 from pathlib import Path
-
+import json
 
 
 links = ['https://en.wikipedia.org/wiki/Wikipedia',
@@ -16,6 +16,8 @@ links = ['https://en.wikipedia.org/wiki/Wikipedia',
          'https://ro.wikipedia.org/wiki/Pandemia_de_coronaviroză_(COVID-19)',
          ]
 
+
+'''No Threading'''
 def get_data(links):
     data = ''
     for i in links:
@@ -33,6 +35,19 @@ def count_sort(data):
     sort_dict = sorted(letter_count.items(), key=lambda x: x[1], reverse=True)
     return sort_dict
 
+def wr_file(sort_dict, file_name):
+    p = Path(file_name)
+    with p.open("w") as write_file:
+        json.dump(sort_dict, write_file, ensure_ascii=False, indent=4)
+
+'''...'''
+
+
+'''With Threading'''
+
+'''...'''
+
 if __name__ == '__main__':
     data = get_data(links)
-    #print(count_sort(data))
+    dict = count_sort(data)
+    #wr_file(dict, 'file')
