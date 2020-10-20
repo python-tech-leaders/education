@@ -1,5 +1,3 @@
-import queue
-import sys
 import collections
 import time
 import requests
