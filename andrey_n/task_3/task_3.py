@@ -1,6 +1,6 @@
 import argparse
-import queue
 import pathlib
+import queue
 import time
 import threading
 from collections import Counter
