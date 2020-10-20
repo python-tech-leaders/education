@@ -1,4 +1,5 @@
 import sys
+import collections
 import time
 import requests
 from pathlib import Path
@@ -44,7 +45,7 @@ def get_symbols_from_link(link: str) -> str:
 
 def sort_dict(symbol_count: dict) -> str:
     """sort dict by values
-    :return: sorted dict"""
+    :return: str"""
     symbol_count_sorted = ''
     for key, val in sorted(symbol_count.items(), key=lambda x: x[1]):
         symbol_count_sorted += f'"{key}": {val}\n'
@@ -64,12 +65,16 @@ def main_no_threading() -> None:
         all_symbols += get_symbols_from_link(link)
 
     # 2) Check every symbol, and create dict with symbol (as ) count
-    symbol_count = {}
+    symbol_count = collections.Counter()
     for symbol in all_symbols:
-        try:
-            symbol_count[symbol] += 1
-        except:
-            symbol_count[symbol] = 1
+        symbol_count[symbol] += 1
+    print(symbol_count)
+    return None
+    # for symbol in all_symbols:
+    #     try:
+    #         symbol_count[symbol] += 1
+    #     except:
+    #         symbol_count[symbol] = 1
 
     # 4) Sort dict by values and convert to str:
     symbol_count_sorted = sort_dict(symbol_count)
