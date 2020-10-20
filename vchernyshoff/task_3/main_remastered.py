@@ -55,7 +55,7 @@ def get_symbols_from_link(link: str) -> str:
     return result
 
 
-def export_to_file(text, name) -> None:
+def export_to_file(text: dict, name: str) -> None:
     """save text to file"""
     output_text = ''
     for key, val in text.items():
@@ -80,8 +80,8 @@ def main_no_threading() -> None:
 
 
 # ======================with threading:==========================================
-def get_symbols_from_link_threaded(link: str):
-    """get html from link"""
+def get_symbols_from_link_threaded(link: str) -> None:
+    """get html text from link"""
     global all_symbols
 
     try:
@@ -97,9 +97,6 @@ def get_symbols_from_link_threaded(link: str):
         print('Connection error occurred: %s', exc)
     except Exception as exc:
         print('An error occurred: %s', exc)
-
-
-
 
 
 def threading_get_symbols_from_link() -> None:
