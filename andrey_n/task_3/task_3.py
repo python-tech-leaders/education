@@ -1,10 +1,11 @@
 import time
-import requests
 import threading
 import pathlib
 import argparse
 import queue
 from collections import Counter
+
+import requests
 
 
 #  START settings
@@ -18,24 +19,6 @@ TARGET = ["https://en.wikipedia.org/wiki/Wikipedia",
               "https://bg.wikipedia.org/wiki/Пандемия_от_коронавирус_(2019_–_2020)",
               "https://be.wikipedia.org/wiki/Пандэмія_COVID-19",
               "https://ro.wikipedia.org/wiki/Pandemia_de_coronaviroză_(COVID-19)", ]
-
-parser = argparse.ArgumentParser(description='Working with URLS')
-parser.add_argument(
-    '--mode',
-    default='single',
-    choices=('single', 'threading'),
-    help='Mode for script (Single or threading)',
-)
-parser.add_argument(
-    '--file_name',
-    default=pathlib.Path('res.txt'),
-    help='Write result to .txt in folder',
-)
-parser.add_argument(
-    '--threads',
-    default=3,
-    help='How many threads you need? Write a number.',
-)
 #  END settings
 
 
@@ -64,7 +47,7 @@ def parse(url: str) -> str:
 
 
 #  single
-def single_parsing(urls: list) -> list:
+def single_parsing(urls: list) -> str:
     """
     Parser without threading
     :param urls:
@@ -73,23 +56,20 @@ def single_parsing(urls: list) -> list:
               Sorted list of all chars with counts
     """
 
-    result = ''
+    res = ''
     for url in urls:
-        result += parse(url)
-    len_of_text = len(result)
-    cnt = sorted(dict(Counter(result)).items(), key=lambda item: item[1], reverse=True)
+        res += parse(url)
 
-    return [len_of_text, cnt]
+    return res
 
 
 # threadings
-
 def thread_data(qu, urls):
     for url in urls:
         qu.put(parse(url))
 
 
-def thread_parse(urls: list, threads: int) -> list:
+def thread_parse(urls: list, threads: int) -> str:
     q = queue.Queue()
     for i in range(threads):
         start = i * len(urls) // threads
@@ -99,15 +79,17 @@ def thread_parse(urls: list, threads: int) -> list:
         print(thread_i.name)
         thread_i.join()
     res = q.get()
-    cnt = sorted(dict(Counter(res)).items(), key=lambda item: item[1], reverse=True)
-    print(f"All chars: {len(res)}")
-
-    return [len(res), cnt]
+    return res
 #  END
 
 
+def result(data: str) -> list:
+    cnt = sorted(dict(Counter(data)).items(), key=lambda item: item[1], reverse=True)
+    return [len(data), cnt]
+
+
 #  START config(write to file)
-def log_to_file(data: list, full_time: time, file_name: str) -> None:
+def log_to_file(data: list, full_time: time, file_name: pathlib.Path) -> None:
     """
     Write to file using pathlib
     :param full_time:
@@ -123,27 +105,35 @@ def log_to_file(data: list, full_time: time, file_name: str) -> None:
             print(res, file=file)
 
 
-#  run scripts
-def main():
-    """
-    run script
-    :return:
-    """
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description='Working with URLS')
+    parser.add_argument(
+        '--mode',
+        default='single',
+        choices=('single', 'threading'),
+        help='Mode for script (Single or threading)',
+    )
+    parser.add_argument(
+        '--file_name',
+        default=pathlib.Path('res.txt'),
+        type=pathlib.Path,
+        help='Write result to .txt in folder',
+    )
+    parser.add_argument(
+        '--threads',
+        default=3,
+        help='How many threads you need? Write a number.',
+    )
+
     start_time = time.time()
     args = parser.parse_args()
     if args.mode == 'single':
-        log_to_file(data=single_parsing(TARGET),
+        log_to_file(data=result(single_parsing(TARGET)),
                     full_time=time.time() - start_time,
                     file_name=args.file_name)
     elif args.mode == 'threading':
-        log_to_file(data=thread_parse(TARGET, int(args.threads)),
+        log_to_file(data=result(thread_parse(TARGET, int(args.threads))),
                     full_time=time.time() - start_time,
                     file_name=args.file_name
                     )
-# END
-
-
-if __name__ == "__main__":
-    main()
-
-
