@@ -5,6 +5,7 @@ import time
 import threading
 from collections import Counter
 
+
 import requests
 
 #  START settings
@@ -160,7 +161,7 @@ if __name__ == "__main__":
         log_to_file(data=result(single_parsing(TARGET)),
                     file_name=args.file_name)
     elif args.mode == "threading":
-        log_to_file(data=result(thread_parse(TARGET, int(args.threads))),
+        log_to_file(data=result(thread_parse(TARGET, abs(args.threads))),
                     file_name=args.file_name
                     )
     print(f"Total time: {time.time() - start_time}")
