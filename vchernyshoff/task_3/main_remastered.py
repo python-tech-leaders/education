@@ -1,24 +1,13 @@
 import argparse
 import collections
-import requests
 import time
 import threading
 from pathlib import Path
 
+import requests
+
 global all_symbols
 all_symbols = ''
-
-
-parser = argparse.ArgumentParser(description='Incredible parser wiki. It shows count of all symbols from asked wiki '
-                                             'http(s) pages.')
-parser.add_argument('--output-file-name', type=Path, default=Path("symbol_count.txt"),
-                    help='set name of an output file (default is "symbol_count.txt")')
-parser.add_argument('--script-mode', type=str, choices=('single', 'threaded'), default='threaded',
-                    help='Script run mode. Values: threaded, single. Default is single')
-parser.add_argument('--threads_count', type=int, default=3,
-                    help='Set max active threads. Default is 3')
-
-args = parser.parse_args()
 
 links = (
     'https://en.wikipedia.org/wiki/Wikipedia',
@@ -121,6 +110,17 @@ def main_with_threading():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Incredible parser wiki. It shows count of all symbols from asked wiki '
+                    'http(s) pages.')
+    parser.add_argument('--output-file-name', type=Path, default=Path("symbol_count.txt"),
+                        help='set name of an output file (default is "symbol_count.txt")')
+    parser.add_argument('--script-mode', type=str, choices=('single', 'threaded'), default='threaded',
+                        help='Script run mode. Values: threaded, single. Default is single')
+    parser.add_argument('--threads_count', type=int, default=3,
+                        help='Set max active threads. Default is 3')
+
+    args = parser.parse_args()
     start_time = time.time()
     if args.script_mode == 'single':
         main_no_threading()
