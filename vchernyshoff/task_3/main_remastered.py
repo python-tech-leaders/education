@@ -11,7 +11,7 @@ all_symbols = ''
 
 parser = argparse.ArgumentParser(description='Incredible parser wiki. It shows count of all symbols from asked wiki '
                                              'http(s) pages.')
-parser.add_argument('--output-file-name', type=str, default='symbol_count.txt',
+parser.add_argument('--output-file-name', type=Path, default=Path("symbol_count.txt"),
                     help='set name of an output file (default is "symbol_count.txt")')
 parser.add_argument('--script-mode', type=str, choices=('single', 'threaded'), default='threaded',
                     help='Script run mode. Values: threaded, single. Default is single')
@@ -72,9 +72,9 @@ def main_no_threading() -> None:
 
     # 2) Check every symbol, and create sorted dict with symbol count
     symbol_count = dict(collections.Counter(all_symbols))
-
+    symbol_count_sorted = sorted(symbol_count.items(), key=lambda item: item[1], reverse=True)
     # 3) export text to file symbol_count.txt
-    export_to_file(symbol_count, args.output_file_name)
+    export_to_file(dict(symbol_count_sorted), args.output_file_name)
 
 
 # ======================with threading:==========================================
@@ -116,7 +116,8 @@ def main_with_threading():
     global all_symbols
     threading_get_symbols_from_link()
     symbol_count = dict(collections.Counter(all_symbols))
-    export_to_file(symbol_count, args.output_file_name)
+    symbol_count_sorted = dict(sorted(symbol_count.items(), key=lambda item: item[1], reverse=True))
+    export_to_file(symbol_count_sorted, args.output_file_name)
 
 
 if __name__ == '__main__':
