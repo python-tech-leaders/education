@@ -7,6 +7,7 @@ from collections import Counter
 
 import requests
 
+
 #  START settings
 TARGET = ("https://en.wikipedia.org/wiki/Wikipedia",
           "https://en.wikipedia.org/wiki/Main_Page",
@@ -18,8 +19,6 @@ TARGET = ("https://en.wikipedia.org/wiki/Wikipedia",
           "https://bg.wikipedia.org/wiki/Пандемия_от_коронавирус_(2019_–_2020)",
           "https://be.wikipedia.org/wiki/Пандэмія_COVID-19",
           "https://ro.wikipedia.org/wiki/Pandemia_de_coronaviroză_(COVID-19)",)
-
-
 #  END settings
 
 
@@ -46,8 +45,6 @@ def parse(url: str) -> str:
         print("Something Else:", err)
 
     return data
-
-
 #  END
 
 
@@ -64,8 +61,6 @@ def single_parsing(urls: tuple) -> str:
         res += parse(url)
 
     return res
-
-
 #  END
 
 
@@ -100,8 +95,6 @@ def thread_parse(urls: tuple, threads: int) -> str:
     res = q.get()
 
     return res
-
-
 #  END
 
 
@@ -156,16 +149,18 @@ if __name__ == "__main__":
 
     start_time = time.time()
     args = parser.parse_args()
-    mode, arg_threads, file_name = args.mode, args.threads, args.file_name
+    mode = args.mode
+    arg_threads = args.threads
+    output_file = args.file_name
 
     if arg_threads <= 0:
         raise argparse.ArgumentTypeError("Value has to be greater than 0")
     if mode == "single":
         log_to_file(data=result(single_parsing(TARGET)),
-                    file_name=file_name
+                    file_name=output_file
                     )
     elif mode == "threading":
         log_to_file(data=result(thread_parse(TARGET, arg_threads)),
-                    file_name=file_name
+                    file_name=output_file
                     )
     print(f"Total time: {time.time() - start_time}")
