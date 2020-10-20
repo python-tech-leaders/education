@@ -115,7 +115,7 @@ def result(data: str) -> list:
     """
 
     cnt = sorted(dict(Counter(data)).items(), key=lambda item: item[1], reverse=True)
-    print("Length of data:", len(data))
+    print(f"Length of data: {len(data)}")
     return cnt
 #  END
 
@@ -157,13 +157,16 @@ if __name__ == "__main__":
 
     start_time = time.time()
     args = parser.parse_args()
-    if args.threads <= 0:
+    mode, arg_threads, file_name = args.mode, args.threads, args.file_name
+
+    if arg_threads <= 0:
         raise argparse.ArgumentTypeError("Value has to be greater than 0")
-    if args.mode == "single":
+    if mode == "single":
         log_to_file(data=result(single_parsing(TARGET)),
-                    file_name=args.file_name)
-    elif args.mode == "threading":
-        log_to_file(data=result(thread_parse(TARGET, args.threads)),
-                    file_name=args.file_name
+                    file_name=file_name
+                    )
+    elif mode == "threading":
+        log_to_file(data=result(thread_parse(TARGET, arg_threads)),
+                    file_name=file_name
                     )
     print(f"Total time: {time.time() - start_time}")
