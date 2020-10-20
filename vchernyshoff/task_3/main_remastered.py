@@ -1,9 +1,9 @@
-import collections
-import time
-import requests
-from pathlib import Path
-import threading
 import argparse
+import collections
+import requests
+import time
+import threading
+from pathlib import Path
 
 global all_symbols
 all_symbols = ''
