@@ -55,12 +55,7 @@ class ProductSpider(scrapy.Spider):
             product['id'] = extract_with_css(
                 '.offer-bottombar__item~ .offer-bottombar__item+ .offer-bottombar__item strong::text')
             product['photos_urls'] = response.css(
-                'descImage > img::attr(src)').getall()
-            #descImage > img
-            '''
-            product['photos_urls'] = response.xpath(
-                '/html/body/div[1]/section/div[3]/div/div[1]/div[1]/div[1]/div[1]/img/@src').getall()
-            '''
+                '#descGallery li a::attr(href)').getall()
             product['seller_name'] = extract_with_css('h4 a::text')
             product['seller_address'] = response.xpath(
                 '//*[@id="offeractions"]/div[4]/div[2]/div[1]/address/p/text()').get()
