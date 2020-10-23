@@ -1,23 +1,7 @@
 import scrapy
-from scrapy.item import Item, Field
 from scrapy.exceptions import CloseSpider
 
-
-class Product(Item):
-    name = Field()
-    url = Field()
-    price = Field()
-    currency = Field()
-    category = Field()
-    state = Field()
-    description = Field()
-    date_of_creation = Field()
-    views_count = Field()
-    id = Field()
-    photos_urls = Field()
-    seller_name = Field()
-    seller_address = Field()
-    olx_delivery_availability = Field()
+from olx_scraping.items import Product
 
 
 class ProductSpider(scrapy.Spider):

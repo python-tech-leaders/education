@@ -3,10 +3,21 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy.item import Field, Item
 
 
-class OlxScrapingItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class Product(Item):
+    name = Field()
+    url = Field()
+    price = Field()
+    currency = Field()
+    category = Field()
+    state = Field()
+    description = Field()
+    date_of_creation = Field()
+    views_count = Field()
+    id = Field()
+    photos_urls = Field()
+    seller_name = Field()
+    seller_address = Field()
+    olx_delivery_availability = Field()
