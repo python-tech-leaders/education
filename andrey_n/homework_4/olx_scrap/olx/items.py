@@ -19,6 +19,6 @@ class OlxItem(scrapy.Item):
     count_views = scrapy.Field()
     prod_id = scrapy.Field()
     product_url = scrapy.Field()
-    seller__name = scrapy.Field()
+    seller_name = scrapy.Field()
     seller_adress = scrapy.Field()
     olx_delivery = scrapy.Field()

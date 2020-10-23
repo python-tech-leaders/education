@@ -73,7 +73,7 @@ class OlxSpider(scrapy.Spider):
         item['date_of_creation'] = response.css('em strong::text').get()
         item['count_views'] = int(response.css('span.offer-bottombar__counter strong::text').get())
         item['prod_id'] = response.css('ul.offer-bottombar__items li>strong::text').get()
-        item['seller__name'] = response.css('div.offer-user__actions a::text').get().strip()
+        item['seller_name'] = response.css('div.offer-user__actions a::text').get().strip()
         item['seller_adress'] = response.css('address p::text').get()
         item['state'] = params.get('Состояние', 'Not Value')
         item['description'] = res_desc
