@@ -10,13 +10,13 @@ class ProductSpider(scrapy.Spider):
     custom_settings = {
         'FEED_URI': 'output.json',
         'FEED_EXPORT_ENCODING': 'utf-8',
-        'CLOSESPIDER_ITEMCOUNT': 10,
+        'CLOSESPIDER_ITEMCOUNT': 100,
     }
 
     allowed_domains = ['olx.ua']
     start_urls = ['https://www.olx.ua/elektronika/']
 
-    MAX_COUNT = 10  # defines maximum items to store
+    MAX_COUNT = 100  # defines maximum items to store
     count = 0
 
     def parse(self, response):
@@ -43,7 +43,7 @@ class ProductSpider(scrapy.Spider):
             product['price'] = int(''.join(response.css(
                 '.not-arranged::text')[0].re(r'\d')))
             product['currency'] = ''.join(response.css(
-                '.not-arranged::text')[0].re(r'\D'))
+                '.not-arranged::text')[0].re(r'\D')).strip()
             product['category'] = response.css(
                 'strong.offer-details__value::text')[1].get()
             product['state'] = response.css(
