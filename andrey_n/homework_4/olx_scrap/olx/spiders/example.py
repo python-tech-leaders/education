@@ -1,49 +1,70 @@
 import scrapy
+from scrapy.exceptions import CloseSpider
 
 from olx.items import OlxItem
 
 
 class OlxSpider(scrapy.Spider):
+    '''
+    olx spider for scraping data
+    '''
+
+    # SETTINGS
     name = 'olx'
     start_urls = [
             'https://www.olx.ua/elektronika/'
         ]
+    TARGET = 10
+    count = 0
+    # END
 
+    # Catalog parser
     def parse(self, response):
+        '''
+        Pagination parser for page with items
+        '''
+
         items = response.css('table#offers_table a.detailsLink::attr(href)').getall()
         pagination = response.css("span.fleft a::attr(href)").getall()
-        page_status = response.css("span.fleft span::attr(class)").getall()
         urls_res = [url for url in set(items) if
                     url.find('https://www.olx.ua/obyavlenie/') != -1]
 
-        with open(file='log.txt', mode='a', encoding='utf8') as file:
-            file.write(str(page_status))
         while len(pagination):
             while urls_res:
                 url = urls_res.pop()
                 yield scrapy.Request(url=url, callback=self.parse_item)
-            url_p = pagination.pop()
 
+            url_p = pagination.pop()
             yield scrapy.Request(url=url_p, callback=self.parse)
 
+    # Item Parser
     def parse_item(self, response):
 
+        if OlxSpider.TARGET == OlxSpider.count:  # throw error when target ready
+            raise CloseSpider('Exceeded maximum items')
+
+        # Data cleaner
         cost = response.css('strong.pricelabel__value::text').get()
         price = cost[:cost.rfind(' ')]
         currency = cost[cost.rfind(' ') + 1:]
+
         params = (dict(zip(response.css('a.offer-details__param--url span::text').getall(),
                   response.css('a.offer-details__param--url strong::text').getall())))
+
         delivery = response.css('span.olx-delivery-badge-icon-wrapper').get()
         if delivery is not None:
             delivery = 'Есть Доставка OLX'
         else:
             delivery = 'Нет Доставка OLX'
+
         description = response.xpath('//div[@id="textContent"]//text()').extract()
         res_desc = ''
         for _str in description:
             _str = _str.strip().replace('\\n', ' ').replace('\\r', ' ').replace('\\t', ' ')
             res_desc += _str
+        # end
 
+        # Save Data
         item = OlxItem()
         item['product_url'] = response.url
         item['name'] = (response.css('div h1::text').get())[9:-3]
@@ -59,5 +80,7 @@ class OlxSpider(scrapy.Spider):
         item['description'] = res_desc
         item['pics_urls'] = response.css('ul#descGallery li a::attr(href)').getall()
         item['olx_delivery'] = delivery
+        OlxSpider.count += 1
+        # end
 
         yield item

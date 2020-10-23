@@ -6,6 +6,7 @@
 import scrapy
 
 
+#  Target Item Class
 class OlxItem(scrapy.Item):
     price = scrapy.Field()
     price_currency = scrapy.Field()

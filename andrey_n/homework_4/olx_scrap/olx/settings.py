@@ -11,7 +11,7 @@ BOT_NAME = 'olx'
 
 SPIDER_MODULES = ['olx.spiders']
 NEWSPIDER_MODULE = 'olx.spiders'
-FEED_EXPORT_ENCODING = 'utf8'
+FEED_EXPORT_ENCODING = 'utf8'  # decode/encode
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'olx (+http://www.yourdomain.com)'
