@@ -5,9 +5,9 @@ from olx.items import OlxItem
 
 
 class OlxSpider(scrapy.Spider):
-    '''
+    """
     olx spider for scraping data
-    '''
+    """
 
     # SETTINGS
     name = 'olx'
@@ -20,22 +20,15 @@ class OlxSpider(scrapy.Spider):
 
     # Catalog parser
     def parse(self, response):
-        '''
+        """
         Pagination parser for page with items
-        '''
+        """
 
-        items = response.css('table#offers_table a.detailsLink::attr(href)').getall()
-        pagination = response.css("span.fleft a::attr(href)").getall()
-        urls_res = [url for url in set(items) if
-                    url.find('https://www.olx.ua/obyavlenie/') != -1]
+        product_page_links = response.css('.detailsLink')
+        yield from response.follow_all(product_page_links, self.parse_item)
 
-        while len(pagination):
-            while urls_res:
-                url = urls_res.pop()
-                yield scrapy.Request(url=url, callback=self.parse_item)
-
-            url_p = pagination.pop()
-            yield scrapy.Request(url=url_p, callback=self.parse)
+        pagination_links = response.css('span.fleft a')
+        yield from response.follow_all(pagination_links, self.parse)
 
     # Item Parser
     def parse_item(self, response):
@@ -51,34 +44,40 @@ class OlxSpider(scrapy.Spider):
         params = (dict(zip(response.css('a.offer-details__param--url span::text').getall(),
                   response.css('a.offer-details__param--url strong::text').getall())))
 
-        delivery = response.css('span.olx-delivery-badge-icon-wrapper').get()
-        if delivery is not None:
-            delivery = 'Есть Доставка OLX'
-        else:
-            delivery = 'Нет Доставка OLX'
-
         description = response.xpath('//div[@id="textContent"]//text()').extract()
         res_desc = ''
         for _str in description:
             _str = _str.strip().replace('\\n', ' ').replace('\\r', ' ').replace('\\t', ' ')
             res_desc += _str
+
+        if response.css('ul#descGallery li a::attr(href)').getall():
+            pics = response.css('ul#descGallery li a::attr(href)').getall()
+        else:
+            pics = response.css('div#descImage img::attr(src)')
+
+        delivery = response.css('span.olx-delivery-badge-icon-wrapper').get()
+        if delivery is not None:
+            delivery = 'Есть Доставка OLX'
+        else:
+            delivery = 'Нет Доставка OLX'
         # end
+
 
         # Save Data
         item = OlxItem()
         item['product_url'] = response.url
         item['name'] = (response.css('div h1::text').get())[9:-3]
         item['category'] = response.css('td.middle ul li span::text').getall()
-        item['price'] = price
+        item['price'] = float(price)
         item['price_currency'] = currency
         item['date_of_creation'] = response.css('em strong::text').get()
-        item['count_views'] = response.css('span.offer-bottombar__counter strong::text').get()
+        item['count_views'] = int(response.css('span.offer-bottombar__counter strong::text').get())
         item['prod_id'] = response.css('ul.offer-bottombar__items li>strong::text').get()
         item['seller__name'] = response.css('div.offer-user__actions a::text').get().strip()
         item['seller_adress'] = response.css('address p::text').get()
-        item['state'] = params.get('Состояние', 'Итак сойдет')
+        item['state'] = params.get('Состояние', 'Not Value')
         item['description'] = res_desc
-        item['pics_urls'] = response.css('ul#descGallery li a::attr(href)').getall()
+        item['pics_urls'] = pics
         item['olx_delivery'] = delivery
         OlxSpider.count += 1
         # end
