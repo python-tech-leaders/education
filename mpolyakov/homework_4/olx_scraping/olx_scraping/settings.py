@@ -11,6 +11,9 @@ BOT_NAME = 'olx_scraping'
 
 SPIDER_MODULES = ['olx_scraping.spiders']
 NEWSPIDER_MODULE = 'olx_scraping.spiders'
+FEED_URI = 'output.json'
+FEED_EXPORT_ENCODING = 'utf-8'
+CLOSESPIDER_ITEMCOUNT = 10
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -56,9 +59,9 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html

@@ -7,12 +7,6 @@ from olx_scraping.items import Product
 class ProductSpider(scrapy.Spider):
     name = 'products'
 
-    custom_settings = {
-        'FEED_URI': 'output.json',
-        'FEED_EXPORT_ENCODING': 'utf-8',
-        'CLOSESPIDER_ITEMCOUNT': 10,
-    }
-
     allowed_domains = ['olx.ua']
     start_urls = ['https://www.olx.ua/elektronika/']
 
