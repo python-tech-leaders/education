@@ -10,13 +10,13 @@ class ProductSpider(scrapy.Spider):
     custom_settings = {
         'FEED_URI': 'output.json',
         'FEED_EXPORT_ENCODING': 'utf-8',
-        'CLOSESPIDER_ITEMCOUNT': 100,
+        'CLOSESPIDER_ITEMCOUNT': 10,
     }
 
     allowed_domains = ['olx.ua']
     start_urls = ['https://www.olx.ua/elektronika/']
 
-    MAX_COUNT = 100  # defines maximum items to store
+    MAX_COUNT = 10  # defines maximum items to store
     count = 0
 
     def parse(self, response):
@@ -39,13 +39,13 @@ class ProductSpider(scrapy.Spider):
         if self.count < self.MAX_COUNT:
             product = Product()
             product['name'] = extract_with_css('h1::text')
-            product['url'] = response.xpath('/html/head/link[1]/@href').get()
+            product['url'] = response.url
             product['price'] = int(''.join(response.css(
                 '.not-arranged::text')[0].re(r'\d')))
             product['currency'] = ''.join(response.css(
                 '.not-arranged::text')[0].re(r'\D')).strip()
             product['category'] = response.css(
-                'strong.offer-details__value::text')[1].get()
+                'td.middle span::text').getall()
             product['state'] = response.css(
                 'strong.offer-details__value::text').re(r'Новый|Б/у')[0]
             product['description'] = extract_with_css('#textContent::text')
@@ -54,8 +54,13 @@ class ProductSpider(scrapy.Spider):
                 '.offer-bottombar__counter strong::text'))
             product['id'] = extract_with_css(
                 '.offer-bottombar__item~ .offer-bottombar__item+ .offer-bottombar__item strong::text')
+            product['photos_urls'] = response.css(
+                'descImage > img::attr(src)').getall()
+            #descImage > img
+            '''
             product['photos_urls'] = response.xpath(
-                '/html/body/div[1]/section/div[3]/div/div[1]/div[1]/div[1]/div[1]/img/@src').get()
+                '/html/body/div[1]/section/div[3]/div/div[1]/div[1]/div[1]/div[1]/img/@src').getall()
+            '''
             product['seller_name'] = extract_with_css('h4 a::text')
             product['seller_address'] = response.xpath(
                 '//*[@id="offeractions"]/div[4]/div[2]/div[1]/address/p/text()').get()
