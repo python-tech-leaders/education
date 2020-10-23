@@ -50,8 +50,8 @@ class ProductSpider(scrapy.Spider):
                 'strong.offer-details__value::text').re(r'Новый|Б/у')[0]
             product['description'] = extract_with_css('#textContent::text')
             product['date_of_creation'] = extract_with_css('em strong::text')
-            product['views_count'] = extract_with_css(
-                '.offer-bottombar__counter strong::text')
+            product['views_count'] = int(extract_with_css(
+                '.offer-bottombar__counter strong::text'))
             product['id'] = extract_with_css(
                 '.offer-bottombar__item~ .offer-bottombar__item+ .offer-bottombar__item strong::text')
             product['photos_urls'] = response.xpath(
