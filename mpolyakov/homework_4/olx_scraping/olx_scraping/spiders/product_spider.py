@@ -26,17 +26,19 @@ class ProductSpider(scrapy.Spider):
     custom_settings = {
         'FEED_URI': 'output.json',
         'FEED_EXPORT_ENCODING': 'utf-8',
-        'CLOSESPIDER_ITEMCOUNT': 100,
+        'CLOSESPIDER_ITEMCOUNT': 10,
     }
 
     allowed_domains = ['olx.ua']
     start_urls = ['https://www.olx.ua/elektronika/']
 
-    MAX_COUNT = 100  # defines maximum items to store
+    MAX_COUNT = 10  # defines maximum items to store
     count = 0
 
     def parse(self, response):
-        '''find links to product page'''
+        """
+        Find links to product page.
+        """
         product_page_links = response.css('.detailsLink')
         yield from response.follow_all(product_page_links, self.parse_product)
 
@@ -44,7 +46,9 @@ class ProductSpider(scrapy.Spider):
         yield from response.follow_all(pagination_links, self.parse)
 
     def parse_product(self, response):
-        '''extract data from product page'''
+        """
+        Extract data from product page
+        """
         def extract_with_css(query):
             return response.css(query).get(default='').strip()
 
