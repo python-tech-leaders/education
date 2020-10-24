@@ -38,7 +38,7 @@ class OLXSpider(scrapy.Spider):
             olx_delivery_availability = response.css('.AdPageBox__link-button-caption::text').get(default = '').strip()
             urls_product = response.xpath('/html/head/link[1]/@href').get()
             seller_name = response.css('h4 a::text').get(default = '').strip()
-            seller_address = response.xpath('//*[@id="offeractions"]/div[4]/div[2]/div[1]/address/p/text()').get()
+            seller_address = response.xpath('//*[@id="offeractions"]/div[4]/div[2]/div[1]/address/p/text()').get(default = '')
 
             product = CategoryItem()
 
