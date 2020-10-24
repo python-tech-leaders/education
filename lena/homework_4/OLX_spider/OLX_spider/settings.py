@@ -1,4 +1,4 @@
-# Scrapy settings for HW4 project
+# Scrapy settings for OLX_spider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'HW4'
+BOT_NAME = 'OLX_spider'
 
-SPIDER_MODULES = ['HW4.spiders']
-NEWSPIDER_MODULE = 'HW4.spiders'
+SPIDER_MODULES = ['OLX_spider.spiders']
+NEWSPIDER_MODULE = 'OLX_spider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'HW4 (+http://www.yourdomain.com)'
+#USER_AGENT = 'OLX_spider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'HW4.middlewares.Hw4SpiderMiddleware': 543,
+#    'OLX_spider.middlewares.OlxSpiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'HW4.middlewares.Hw4DownloaderMiddleware': 543,
+#    'OLX_spider.middlewares.OlxSpiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'HW4.pipelines.Hw4Pipeline': 300,
+#    'OLX_spider.pipelines.OlxSpiderPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
