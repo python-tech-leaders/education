@@ -1,1 +1,1 @@
-from .pagescrapper import ElectronicsSpider
+from .start import get_data
