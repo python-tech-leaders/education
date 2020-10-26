@@ -87,6 +87,6 @@ class ElectronicsSpider(scrapy.Spider):
         item['url'] = response.url.strip()
         item['seller_name'] = response.xpath("//div[@class='offer-user__actions']/h4/a/text()").get().strip()
         item['seller_address'] = response.xpath("//div[@class='offer-user__address']/address/p/text()").get().strip()
-        item['olx_delivery_availability'] = bool(response.xpath("//span[@class=' AdPageBox__link-button-caption  svelte-14f8vge']"))
+        item['olx_delivery_availability'] = response.xpath("//span[@class=' AdPageBox__link-button-caption  svelte-14f8vge']") > 0
 
         return item
