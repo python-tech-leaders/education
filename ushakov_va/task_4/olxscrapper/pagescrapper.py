@@ -75,9 +75,12 @@ class ElectronicsSpider(scrapy.Spider):
                 [i for i in response.xpath("//strong[@class='offer-details__value']/text()") if i.root == 'Новый'])[
             0].get()
         item['description'] = ''.join([i.get().strip() for i in response.xpath("//div[@id='textContent']/text()")])
-        item['date_of_creation'] = datetime.strptime(
-            _multiple_replace(response.xpath("//li[@class='offer-bottombar__item'][1]/em/strong/text()").get().strip(),
-                              _months), 'в %H:%M, %d %b %Y').strftime("%Y-%m-%d-%H.%M.%S")
+        text_of_date_of_creation = response.xpath(
+            "//li[@class='offer-bottombar__item'][1]/em/strong/text()").get().strip()  # get text from site
+        text_of_date_of_creation = _multiple_replace(text_of_date_of_creation,
+                                                     _months)  # change month's name from Russian to English
+        item['date_of_creation'] = datetime.strptime(text_of_date_of_creation, 'в %H:%M, %d %b %Y').strftime(
+            "%Y-%m-%d-%H.%M.%S")  # convert to correct datetime format
         item['views_count'] = response.xpath(
             "//li[@class='offer-bottombar__item'][2]/span[@class='offer-bottombar__counter']/strong/text()").get().strip()
         item['id'] = response.xpath("//li[@class='offer-bottombar__item'][3]/strong/text()").get().strip()
