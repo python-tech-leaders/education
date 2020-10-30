@@ -24,6 +24,7 @@
 ### Materials
 
 0. [Grokking algorithms](https://www.ozon.ru/context/detail/id/147945774/)
+1. [Pytest](https://docs.pytest.org/en/stable/)
 
 ## Stage 3 - Data scraping 
 
