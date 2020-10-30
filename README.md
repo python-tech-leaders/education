@@ -9,7 +9,22 @@
 4. [SQL video course](https://www.youtube.com/playlist?list=PLrCZzMib1e9reQb3ZXLWVaEu2CM3R54ho)
 5. [Why you should be using pathlib](https://treyhunner.com/2018/12/why-you-should-be-using-pathlib/)
 
-## Stage 4 - Will be added on 23.10.2020
+## Stage 5 - Will be added on 02.11.2020
+
+## Stage 4 - Algorithms and Advanced Python
+
+### Homework 5
+
+0. Read Grokking algorithms book.
+1. Use `homeworks/homework_5` folder as a scaffolding for you task. Send a pull-request to `python-tech-leaders/education` that should include:
+     - write solutions for problems from `main.py` file using TDD
+     - extend .gitignore file
+     - extend Makefile
+
+### Materials
+
+0. [Grokking algorithms](https://www.ozon.ru/context/detail/id/147945774/)
+1. [Pytest](https://docs.pytest.org/en/stable/)
 
 ## Stage 3 - Data scraping 
 
