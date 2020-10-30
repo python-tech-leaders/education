@@ -16,8 +16,10 @@
 ### Homework 5
 
 0. Read Grokking algorithms book.
-1. Send a pull-request to `python-tech-leaders/education` repo with your folder that contains following:
-
+1. Use `homeworks/homework_5` folder as a scaffolding for you task. Send a pull-request to `python-tech-leaders/education` that should include:
+     - write solutions for problems from `main.py` file using TDD
+     - extend .gitignore file
+     - extend Makefile
 
 ### Materials
 
