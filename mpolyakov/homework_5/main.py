@@ -1,6 +1,3 @@
-from collections import Counter
-
-
 def double_input(input_data):
     """Doubles input"""
     return input_data * 2
@@ -110,8 +107,7 @@ def is_isogram(input_string):
     is_isogram("aba" ) == false
     is_isogram("moOse" ) == false # -- ignore letter case
     """
-    counter = Counter(input_string.lower())
-    return len(list(counter)) == len(input_string)
+    return len(set(input_string.lower())) == len(input_string)
 
 
 def snail(input_array):
