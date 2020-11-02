@@ -1,5 +1,3 @@
-import datetime
-
 def double_input(input_data):
     """Doubles input"""
     return input_data * 2
@@ -40,7 +38,6 @@ def strip_comments(input_string, markers):
         for next_symbol in string:
             if next_symbol in markers:
                 new_string = string.split(next_symbol)[0]
-
         if new_string == '':
             new_string = string
         new_strings += new_string.strip() + '\n'
@@ -80,7 +77,7 @@ def format_duration(input_seconds):
     MIN = 60
     # years, days, hours, seconds = None, None, None, None
 
-    result = datetime.timedelta(seconds=input_seconds)
+    # result = datetime.timedelta(seconds=input_seconds)
     # print(result.days, result.minutes, result.seconds)
     seconds = input_seconds
     # if input_seconds // YEAR > 1:

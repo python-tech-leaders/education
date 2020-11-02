@@ -3,6 +3,26 @@ import pytest
 # import vchernyshoff.homework_5.main as main
 import main
 
+# double_input ====================================================================================
+@pytest.mark.parametrize(
+    "input_data,expected",
+    [
+        (10, 20),
+        ([1, 2], [1, 2, 1, 2])
+    ],
+)
+def test_double_input(input_data, expected):
+    """Test double_input function"""
+    assert main.double_input(input_data) == expected
+
+
+def test_double_input_raises():
+    """Test double_input function raises exception"""
+    with pytest.raises(TypeError):
+        main.double_input(list)
+
+
+# strip_comments ====================================================================================
 @pytest.mark.parametrize(
     "input_string, input_separators, expected",
     [
@@ -18,8 +38,7 @@ def test_strip_comments(input_string, input_separators, expected):
     assert main.strip_comments(input_string, input_separators) == expected
 
 
-
-
+# format_duration ====================================================================================
 @pytest.mark.parametrize(
     "input_seconds, expected",
     [
@@ -37,8 +56,3 @@ def test_format_duration_raises():
     """Test double_input function raises exception"""
     with pytest.raises(TypeError):
         main.format_duration(str, list, dict, set)
-
-# def test_double_input_raises():
-#     """Test double_input function raises exception"""
-#     with pytest.raises(TypeError):
-#         main.double_input(list)
