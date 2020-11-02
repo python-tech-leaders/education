@@ -7,7 +7,7 @@ test_cov:
 install_requirements:
 	@pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-nstall_dev_requirements:
+install_dev_requirements:
 	@pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.dev.txt
 
 lint:
