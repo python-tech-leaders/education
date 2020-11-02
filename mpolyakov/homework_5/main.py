@@ -7,12 +7,18 @@ def double_input(input_data):
 
 
 def find_stop(input_string, marker):
+    """
+    Return index of first element matching given marker.
+    """
     for index, item in enumerate(input_string):
         if item == marker:
             return index
 
 
 def find_start(input_string):
+    """
+    Return index of first element matching "\n".
+    """
     for index, item in enumerate(input_string):
         if item == "\n":
             return index
@@ -20,7 +26,8 @@ def find_start(input_string):
 
 def strip_comments(input_string, markers):
     """
-    Complete the solution so that it strips all text that follows any of a set of comment markers passed in.
+    Complete the solution so that it strips all text
+    that follows any of a set of comment markers passed in.
     Any whitespace at the end of the line should also be stripped out.
 
     Example:
@@ -57,8 +64,11 @@ def strip_comments(input_string, markers):
 
 def format_duration(input_seconds):
     """
-    Your task is to write a function which formats a duration, given as a number of seconds, in a human-friendly way.
-    The function must accept a non-negative integer. If it is zero, it just returns "now". Otherwise, the duration is expressed as a combination of years, days, hours, minutes and seconds.
+    Your task is to write a function which formats a duration,
+    given as a number of seconds, in a human-friendly way.
+    The function must accept a non-negative integer.
+    If it is zero, it just returns "now".
+    Otherwise,the duration is expressed as a combination of years, days, hours, minutes and seconds.
 
     Examples:
 
@@ -79,9 +89,9 @@ def format_duration(input_seconds):
     days_text = "days" if days > 1 else "day"
     years_text = "years" if years > 1 else "year"
     if years:
-        return f"{years} {years_text}, {days} {days_text}, {hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"
+        return f"{years} {years_text}, {days} {days_text}, {hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"  # pylint: disable=C0301
     elif days:
-        return f"{days} {days_text}, {hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"
+        return f"{days} {days_text}, {hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"  # pylint: disable=C0301
     elif hours:
         return f"{hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"
     elif minutes > 1:
@@ -106,7 +116,8 @@ def is_isogram(input_string):
 
 def snail(input_array):
     """
-    Given an n x n array, return the array elements arranged from outermost elements to the middle element, traveling clockwise.
+    Given an n x n array, return the array elements arranged
+    from outermost elements to the middle element, traveling clockwise.
 
     array = [[1,2,3],
              [4,5,6],

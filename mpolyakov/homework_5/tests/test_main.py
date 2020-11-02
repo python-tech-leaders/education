@@ -1,3 +1,7 @@
+"""
+Tests for main.py.
+"""
+
 import pytest
 
 import main
@@ -20,15 +24,17 @@ def test_double_input_raises():
 
 @pytest.mark.parametrize(
     "input_data,expected",
-    [("Dermatoglyphics", True), ("aba", False), ("moOse", False)],
+    [("", True), ("Dermatoglyphics", True), ("aba", False), ("moOse", False)],
 )
 def test_is_isogram(input_data, expected):
+    """Test is_isogram function"""
     assert main.is_isogram(input_data) == expected
 
 
 @pytest.mark.parametrize(
     "input_data,expected",
     [
+        (0, "now"),
         (62, "1 minute and 2 seconds"),
         (3721, "1 hour, 2 minutes and 1 second"),
         (103721, "1 day, 4 hours, 48 minutes and 41 seconds"),
@@ -38,6 +44,7 @@ def test_is_isogram(input_data, expected):
     ],
 )
 def test_format_duration(input_data, expected):
+    """Test format_duration function"""
     assert main.format_duration(input_data) == expected
 
 
@@ -58,4 +65,5 @@ def test_format_duration(input_data, expected):
     ],
 )
 def test_strip_comments(input_data, expected):
+    """Test strip_comments function"""
     assert main.strip_comments(input_data[0], input_data[1]) == expected
