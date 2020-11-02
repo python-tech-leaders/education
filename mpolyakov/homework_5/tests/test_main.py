@@ -49,21 +49,20 @@ def test_format_duration(input_data, expected):
 
 
 @pytest.mark.parametrize(
-    "input_data,expected",
+    "input_string,input_separators,expected",
     [
         (
-            ("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]),
+            "apples, pears # and bananas\ngrapes\nbananas !apples",
+            ["#", "!"],
             "apples, pears\ngrapes\nbananas",
         ),
         (
-            (
-                "  apples, pears # and bla-bla\ngrapes ?hello\nbananas !apples.  ",
-                ["#", "!", "?"],
-            ),
+            "  apples, pears # and bla-bla\ngrapes ?hello\nbananas !apples.  ",
+            ["#", "!", "?"],
             "apples, pears\ngrapes\nbananas",
         ),
     ],
 )
-def test_strip_comments(input_data, expected):
+def test_strip_comments(input_string, input_separators, expected):
     """Test strip_comments function"""
-    assert main.strip_comments(input_data[0], input_data[1]) == expected
+    assert main.strip_comments(input_string, input_separators) == expected
