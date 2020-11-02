@@ -80,21 +80,20 @@ def format_duration(input_seconds):
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
     years, days = divmod(days, 365)
-    seconds_text = "seconds" if seconds > 1 else "second"
-    minutes_text = "minutes" if minutes > 1 else "minute"
-    hours_text = "hours" if hours > 1 else "hour"
-    days_text = "days" if days > 1 else "day"
-    years_text = "years" if years > 1 else "year"
+
+    def add_s(input_number, text):
+        return text + "s" if input_number > 1 else text
+
     if years:
-        return f"{years} {years_text}, {days} {days_text}, {hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"  # pylint: disable=C0301
+        return f"{years} {add_s(years, 'year')}, {days} {add_s(days, 'day')}, {hours} {add_s(hours, 'hour')}, {minutes} {add_s(minutes, 'minute')} and {seconds} {add_s(seconds, 'second')}"  # pylint: disable=C0301
     elif days:
-        return f"{days} {days_text}, {hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"  # pylint: disable=C0301
+        return f"{days} {add_s(days, 'day')}, {hours} {add_s(hours, 'hour')}, {minutes} {add_s(minutes, 'minute')} and {seconds} {add_s(seconds, 'second')}"  # pylint: disable=C0301
     elif hours:
-        return f"{hours} {hours_text}, {minutes} {minutes_text} and {seconds} {seconds_text}"
+        return f"{hours} {add_s(hours, 'hour')}, {minutes} {add_s(minutes, 'minute')} and {seconds} {add_s(seconds, 'second')}"  # pylint: disable=C0301
     elif minutes > 1:
-        return f"{minutes} {minutes_text} and {seconds} {seconds_text}"
+        return f"{minutes} {add_s(minutes, 'minute')} and {seconds} {add_s(seconds, 'second')}"
     elif minutes == 1:
-        return f"{minutes} {minutes_text} and {seconds} {seconds_text}"
+        return f"{minutes} {add_s(minutes, 'minute')} and {seconds} {add_s(seconds, 'second')}"
 
 
 def is_isogram(input_string):
