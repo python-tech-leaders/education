@@ -1,5 +1,7 @@
 test:
 	@pytest tests
+
+test_cov:
 	@pytest --cov-config=.coveragerc --cov=. tests/
 
 install_requirements:
@@ -14,4 +16,4 @@ lint:
 format:
 	@black main.py tests/
 
-.PHONY: test install_requirements install_dev_requirements lint format
+.PHONY: test test_cov install_requirements install_dev_requirements lint format
