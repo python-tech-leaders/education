@@ -6,13 +6,13 @@ def double_input(input_data):
     return input_data * 2
 
 
-def find_start(input_string, markers):
+def find_stop(input_string, marker):
     for index, item in enumerate(input_string):
-        if item in markers:
+        if item == marker:
             return index
 
 
-def find_stop(input_string):
+def find_start(input_string):
     for index, item in enumerate(input_string):
         if item == "\n":
             return index
@@ -49,9 +49,9 @@ def strip_comments(input_string, markers):
     result = input_string[:] + "\n"
     for marker in markers:
         cursor = iter(result)
-        start = find_start(cursor, marker)
-        stop = find_stop(cursor) + start + 1
-        result = result[:start].strip() + result[stop:]
+        stop = find_stop(cursor, marker)
+        start = find_start(cursor) + stop + 1
+        result = result[:stop].strip() + result[start:]
     return result.strip()
 
 
