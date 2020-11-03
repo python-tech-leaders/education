@@ -69,15 +69,21 @@ def format_duration(input_seconds: int) -> str:
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
     years, days = divmod(days, 365)
-    all_date = [(years, 'year'), (days, 'day'), (hours, 'hour'), (minutes, 'minute'), (seconds, 'second')]
+    all_date = [
+        (years, "year"),
+        (days, "day"),
+        (hours, "hour"),
+        (minutes, "minute"),
+        (seconds, "second"),
+    ]
     real_date = [item for item in all_date if item[0]]
     for item in real_date:
         if item[0] > 1:
-            res.append(f'{item[0]} {item[1]}s')
+            res.append(f"{item[0]} {item[1]}s")
         else:
-            res.append(f'{item[0]} {item[1]}')
-    last = ' and ' + res.pop()
-    return ', '.join(res) + last
+            res.append(f"{item[0]} {item[1]}")
+    last = " and " + res.pop()
+    return ", ".join(res) + last
 
 
 def is_isogram(input_string: str) -> bool:
@@ -140,4 +146,3 @@ def snail(input_array):
         col_start += 1
 
     return res
-
