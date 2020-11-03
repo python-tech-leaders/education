@@ -74,6 +74,8 @@ def format_duration(input_seconds):
 
     Assume that year is 365 days
     """
+    if input_seconds < 0:
+        return None
     if input_seconds == 0:
         return "now"
     minutes, seconds = divmod(input_seconds, 60)
@@ -127,7 +129,12 @@ def snail(input_array):
 
     For better understanding: http://www.haan.lu/files/2513/8347/2456/snail.png
     """
-    pass
+    if not input_array:
+        return []
+    else:
+        return input_array.pop(0) + snail(
+            list(list(row) for row in zip(*input_array))[::-1]
+        )
 
 
 """
