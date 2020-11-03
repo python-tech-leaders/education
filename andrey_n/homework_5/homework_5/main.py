@@ -99,7 +99,7 @@ def is_isogram(input_string: str) -> bool:
     return len(set(input_string.lower())) == len(input_string)
 
 
-def snail(input_array):
+def snail(input_array: list) -> list:
     """
     Given an n x n array, return the array elements arranged from outermost elements to the
     middle element, traveling clockwise.
