@@ -80,9 +80,7 @@ def format_duration(input_seconds):
     # result = datetime.timedelta(seconds=input_seconds)
     # print(result.days, result.minutes, result.seconds)
     seconds = input_seconds
-    # if input_seconds // YEAR > 1:
-    #     years = seconds // YEAR
-    #     seconds -= years * YEAR
+
     years, seconds = check_period(seconds, YEAR)
     days, seconds = check_period(seconds, DAY)
     hours, seconds = check_period(seconds, HOUR)
@@ -120,7 +118,15 @@ def is_isogram(input_string):
     is_isogram("aba" ) == false
     is_isogram("moOse" ) == false # -- ignore letter case
     """
-    pass
+    all_symbols = list(str(input_string).lower())
+    temp_symbols = all_symbols
+    for symbol in all_symbols:
+        temp_symbols.remove(symbol)
+        if symbol in temp_symbols:
+            return False
+    return True
+
+
 
 
 def snail(input_array):
@@ -148,8 +154,10 @@ Lazy init
 https://www.codewars.com/kata/59b7b43b4f98a81b2d00000a
 """
 if __name__ == '__main__':
-    strip_ex = 'apples, pears # and bananas\ngrapes\nbananas !apples'
-    args = ["#", "!"]
-    strip_comments(strip_ex, args)
-    format_duration(123456789)
-    format_duration(1)
+    # strip_ex = 'apples, pears # and bananas\ngrapes\nbananas !apples'
+    # args = ["#", "!"]
+    # strip_comments(strip_ex, args)
+    # format_duration(123456789)
+    # format_duration(1)
+    # print(is_isogram(123))
+    pass

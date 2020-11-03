@@ -56,3 +56,20 @@ def test_format_duration_raises():
     """Test double_input function raises exception"""
     with pytest.raises(TypeError):
         main.format_duration(str, list, dict, set)
+
+
+# is_isogram ====================================================================================
+@pytest.mark.parametrize(
+    "input_data,expected",
+    [
+        ('abcde', True),
+        ('abcdAe', False),
+        ('aabcde', False),
+        (12345, True),
+        (123131, False),
+    ],
+)
+def test_is_isogram(input_data, expected):
+    """Test is_isogram function"""
+    assert main.is_isogram(input_data) == expected
+
