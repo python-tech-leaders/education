@@ -119,14 +119,12 @@ def is_isogram(input_string):
     is_isogram("moOse" ) == false # -- ignore letter case
     """
     all_symbols = list(str(input_string).lower())
-    temp_symbols = all_symbols
+    temp_list = all_symbols
     for symbol in all_symbols:
-        temp_symbols.remove(symbol)
-        if symbol in temp_symbols:
+        temp_list.remove(symbol)
+        if symbol in temp_list:
             return False
     return True
-
-
 
 
 def snail(input_array):
@@ -146,7 +144,19 @@ def snail(input_array):
 
     For better understanding: http://www.haan.lu/files/2513/8347/2456/snail.png
     """
-    pass
+    result = []
+    n = len(input_array[0])
+    # for i in range(n):
+    #     result.append(input_array[0][i])
+    # result.pop()
+    # for next_string in input_array:
+    #     result.append(next_string[n-1])
+
+    # I can't do this task.
+
+    return result
+
+
 
 
 """
@@ -161,3 +171,7 @@ if __name__ == '__main__':
     # format_duration(1)
     # print(is_isogram(123))
     pass
+    # array = [[1,2,3],
+    #          [4,5,6],
+    #          [7,8,9]]
+    # print(snail(array))
