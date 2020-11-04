@@ -53,7 +53,7 @@ def test_strip_comments(input_data, mask, expected):
         ),
     ],
 )
-def test_strip_comments1(input_data, mask, expected):
+def test_strip_comments_2(input_data, mask, expected):
     """Test strip_comments function"""
     assert main.strip_comments(input_data, mask) != expected
 
@@ -80,7 +80,7 @@ def test_format_duration(input_data, expected):
     "input_data,expected",
     [(0, "10 sec"), (14, "1 hour, 2 minutes")],
 )
-def test_format_duration1(input_data, expected):
+def test_format_duration_2(input_data, expected):
     """Test format_duration function"""
     assert main.format_duration(input_data) != expected
 
@@ -98,7 +98,7 @@ def test_is_isogram(input_data, expected):
     "input_data,expected",
     [("daddy", True), ("Dmitro", False)],
 )
-def test_is_isogram1(input_data, expected):
+def test_is_isogram_2(input_data, expected):
     """Test is_isogram function"""
     assert main.is_isogram(input_data) != expected
 
