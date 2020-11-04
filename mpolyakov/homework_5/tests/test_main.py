@@ -55,9 +55,9 @@ def test_format_duration(input_data, expected):
     assert main.format_duration(input_data) == expected
 
 
-def test_negative_format_duration(input_data=-1, expected="-1 second"):
+def test_negative_format_duration():
     """Test format_duration function with negative argument"""
-    assert main.format_duration(input_data) != expected
+    assert main.format_duration(-1) != "-1 second"
 
 
 @pytest.mark.parametrize(
