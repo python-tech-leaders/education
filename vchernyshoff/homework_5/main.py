@@ -34,12 +34,10 @@ def strip_comments(input_string, markers):
     new_strings = ''
     strings = input_string.split('\n')
     for string in strings:
-        new_string = ''
+        new_string = string
         for next_symbol in string:
             if next_symbol in markers:
                 new_string = string.split(next_symbol)[0]
-        if new_string == '':
-            new_string = string
         new_strings += new_string.strip() + '\n'
     new_strings = new_strings[:-1]  # cut last \n
 
@@ -89,23 +87,16 @@ def format_duration(input_seconds):
     result = ''
 
     if years:
-        # print(years, 'years,', end=' ')
         result += years + ' years, '
     if days:
-        # print(days, 'days,', end=' ')
         result += days + ' days, '
     if hours:
-        # print(hours, 'hours,', end=' ')
         result += hours + ' hours, '
     if minutes:
-        # print(minutes, 'minutes', end=' and ')
         result += minutes + ' minutes and '
-    # print(seconds, 'seconds')
     result += str(seconds) + ' seconds'
 
-    print(result)
     return result
-
 
 
 def is_isogram(input_string):
