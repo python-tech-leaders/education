@@ -19,11 +19,8 @@ install_requirements_dev:
 
 .PHONY: lint
 lint:
-
-	@pylint *.py tests/
-
+	@pylint *py tests/
 
 .PHONY: format
 format:
-
 	@black main.py tests/
