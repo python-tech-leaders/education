@@ -61,3 +61,4 @@ class GoodSpider(scrapy.Spider):
             yield good
         else:
             raise CloseSpider('Exceeded maximum items')
+            
