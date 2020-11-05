@@ -87,19 +87,48 @@ def format_duration(input_seconds):
     result = ''
 
     if years:
-        result += years + ' years, '
+        result += years
+        if int(years) > 1:
+            result += ' years'
+        else:
+            result += ' year'
     if days:
-        result += days + ' days, '
+        if result != '':
+            result += ', '
+        result += days
+        if int(days) > 1:
+            result += ' days'
+        else:
+            result += ' day'
     if hours:
-        result += hours + ' hours, '
+        if result != '':
+            result += ', '
+        result += hours
+        if int(hours) > 1:
+            result += ' hours'
+        else:
+            result += ' hour'
     if minutes:
-        result += minutes + ' minutes and '
-    result += str(seconds) + ' seconds'
+        if result != '':
+            result += ', '
+        result += minutes
+        if int(minutes) > 1:
+            result += ' minutes'
+        else:
+            result += ' minute'
+
+    if result != '':
+        result += ' and '
+    result += str(seconds)
+    if int(seconds) > 1:
+        result += ' seconds'
+    else:
+        result += ' second'
 
     return result
 
 
-def is_isogram(input_string):
+def is_isogram(input_string: str) -> bool:
     """
     An isogram is a word that has no repeating letters, consecutive or non-consecutive.
     Implement a function that determines whether a string that contains only letters is an isogram.
@@ -158,9 +187,9 @@ if __name__ == '__main__':
     # strip_ex = 'apples, pears # and bananas\ngrapes\nbananas !apples'
     # args = ["#", "!"]
     # strip_comments(strip_ex, args)
-    # format_duration(123456789)
+    print(format_duration(123456789))
     # format_duration(1)
-    # print(is_isogram(123))
+    # print(is_isogram('oa'))
     pass
     # array = [[1,2,3],
     #          [4,5,6],
