@@ -31,14 +31,14 @@ def strip_comments(input_string, markers):
     result = strip_comments("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"])
     # "apples, pears\ngrapes\nbananas"
     """
-    new_strings = ''
-    strings = input_string.split('\n')
+    new_strings = ""
+    strings = input_string.split("\n")
     for string in strings:
         new_string = string
         for next_symbol in string:
             if next_symbol in markers:
                 new_string = string.split(next_symbol)[0]
-        new_strings += new_string.strip() + '\n'
+        new_strings += new_string.strip() + "\n"
     new_strings = new_strings[:-1]  # cut last \n
 
     print(new_strings)
@@ -57,6 +57,7 @@ def format_duration(input_seconds):
 
     Assume that year is 365 days
     """
+
     def check_period(seconds, period):
         quantity = None
         if input_seconds // period > 1:
@@ -66,8 +67,7 @@ def format_duration(input_seconds):
         return quantity, seconds
 
     if input_seconds == 0:
-        return 'now'
-
+        return "now"
 
     YEAR = 31536000
     DAY = 86400
@@ -84,46 +84,46 @@ def format_duration(input_seconds):
     hours, seconds = check_period(seconds, HOUR)
     minutes, seconds = check_period(seconds, MIN)
 
-    result = ''
+    result = ""
 
     if years:
         result += years
         if int(years) > 1:
-            result += ' years'
+            result += " years"
         else:
-            result += ' year'
+            result += " year"
     if days:
-        if result != '':
-            result += ', '
+        if result != "":
+            result += ", "
         result += days
         if int(days) > 1:
-            result += ' days'
+            result += " days"
         else:
-            result += ' day'
+            result += " day"
     if hours:
-        if result != '':
-            result += ', '
+        if result != "":
+            result += ", "
         result += hours
         if int(hours) > 1:
-            result += ' hours'
+            result += " hours"
         else:
-            result += ' hour'
+            result += " hour"
     if minutes:
-        if result != '':
-            result += ', '
+        if result != "":
+            result += ", "
         result += minutes
         if int(minutes) > 1:
-            result += ' minutes'
+            result += " minutes"
         else:
-            result += ' minute'
+            result += " minute"
 
-    if result != '':
-        result += ' and '
+    if result != "":
+        result += " and "
     result += str(seconds)
     if int(seconds) > 1:
-        result += ' seconds'
+        result += " seconds"
     else:
-        result += ' second'
+        result += " second"
 
     return result
 
@@ -177,13 +177,11 @@ def snail(input_array):
     return result
 
 
-
-
 """
 Lazy init
 https://www.codewars.com/kata/59b7b43b4f98a81b2d00000a
 """
-if __name__ == '__main__':
+if __name__ == "__main__":
     # strip_ex = 'apples, pears # and bananas\ngrapes\nbananas !apples'
     # args = ["#", "!"]
     # strip_comments(strip_ex, args)

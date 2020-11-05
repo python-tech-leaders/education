@@ -11,13 +11,13 @@ install_requirements_dev:
     @pip install --no-cache-dir -r requirements.dev.txt
 
 .PHONY: lint
-install_lint:
-    @pip install --no-cache-dir pylint
+check_lint:
+    @pylint main.py
 
 .PHONY: black
-install_black:
-    @pip install --no-cache-dir black
+gofmt_black:
+    @black main.py
 
 .PHONY: pytest_coverage
-install_pytest_coverage:
-    @pip install --no-cache-dir pip install pytest-cov
+start_pytest_coverage:
+    @coverage run -m pytest && coverage report -m
