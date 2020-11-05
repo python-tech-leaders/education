@@ -109,7 +109,7 @@ def is_isogram(input_string):
     is_isogram("aba" ) == false
     is_isogram("moOse" ) == false # -- ignore letter case
     """
-    all_symbols = list(str(input_string).lower())
+    all_symbols = list(input_string.lower())
     temp_list = all_symbols
     for symbol in all_symbols:
         temp_list.remove(symbol)
