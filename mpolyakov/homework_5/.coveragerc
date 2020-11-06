@@ -1,0 +1,4 @@
+[run]
+omit = 
+    */hw5_venv/*
+    */tests/*
